@@ -1,0 +1,19 @@
+[info]
+title=CudaLint
+desc=Linting (syntax-checking) of source code. Needs "linters" for each lexer you want to check. See useful help in readme folder.
+type=cudatext-plugin
+subdir=cuda_lint
+
+[item1]
+section=events
+events=on_start
+
+[item2]
+section=commands
+caption=CudaLint\Lint
+method=run
+
+[item3]
+section=commands
+caption=CudaLint\Config...
+method=config
