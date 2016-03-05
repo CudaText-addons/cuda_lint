@@ -3,6 +3,7 @@ title=CudaLint
 desc=Linting (syntax-checking) of source code. Needs "linters" for each lexer you want to check. See useful help in readme folder.
 type=cudatext-plugin
 subdir=cuda_lint
+homepage=https://github.com/CudaText-addons/cuda_lint
 
 [item1]
 section=events
