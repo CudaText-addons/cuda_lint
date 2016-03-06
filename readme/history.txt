@@ -1,3 +1,6 @@
+
+1.0.2
++ hints shown on bookmark icons mouse-over
  
 1.0.0 (feb 2016)
 init
