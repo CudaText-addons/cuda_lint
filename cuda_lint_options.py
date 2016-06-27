@@ -74,18 +74,18 @@ def do_options_save():
     app.ini_write(fn_ini, 'colors', 'warn', int_to_html(color_warn))
     app.ini_write(fn_ini, 'colors', 'info', int_to_html(color_info))
 
-    app.ini_write(fn_ini, 'colors', 'error_use', '1' if color_error_use else '0')
-    app.ini_write(fn_ini, 'colors', 'warn_use', '1' if color_warn_use else '0')
-    app.ini_write(fn_ini, 'colors', 'info_use', '1' if color_info_use else '0')
+    app.ini_write(fn_ini, 'colors', 'error_use', str(int(color_error_use)))
+    app.ini_write(fn_ini, 'colors', 'warn_use', str(int(color_warn_use)))
+    app.ini_write(fn_ini, 'colors', 'info_use', str(int(color_info_use)))
     
-    app.ini_write(fn_ini, 'events', 'on_open', '1' if use_on_open else '0')
-    app.ini_write(fn_ini, 'events', 'on_change', '1' if use_on_change else '0')
+    app.ini_write(fn_ini, 'events', 'on_open', str(int(use_on_open)))
+    app.ini_write(fn_ini, 'events', 'on_change', str(int(use_on_change)))
 
 do_options_load()
 
 fn_warn = os.path.join(os.path.dirname(__file__), 'icons', 'bookmark_warn.bmp')
 fn_error = os.path.join(os.path.dirname(__file__), 'icons', 'bookmark_err.bmp')
 
-app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_ERROR, color_error, fn_error)
-app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_WARN, color_warn, fn_warn)
-app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_INFO, color_info, fn_warn)
+app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_ERROR, color_error if color_error_use else app.COLOR_NONE, fn_error)
+app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_WARN, color_warn if color_warn_use else app.COLOR_NONE, fn_warn)
+app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_INFO, color_info if color_info_use else app.COLOR_NONE, fn_warn)

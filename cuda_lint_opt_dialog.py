@@ -13,22 +13,16 @@ def do_options_dlg():
     id_ok=8
 
     while True:
-        val_bk_er='1' if opt.color_error_use else '0'
-        val_bk_warn='1' if opt.color_warn_use else '0'
-        val_bk_info='1' if opt.color_info_use else '0'
-        val_ev_open='1' if opt.use_on_open else '0'
-        val_ev_ch='1' if opt.use_on_change else '0'
-
         c1 = chr(1)
         text = '\n'.join([] 
-            +[c1.join(['type=button', 'pos=6,6,180,0', 'cap=Color of errors'])]
-            +[c1.join(['type=check', 'pos=186,6,400,0', 'cap=Colored error bookmarks', 'val='+val_bk_er])]
-            +[c1.join(['type=button', 'pos=6,36,180,0', 'cap=Color of warns'])]
-            +[c1.join(['type=check', 'pos=186,36,400,0', 'cap=Colored warn bookmarks', 'val='+val_bk_warn])]
-            +[c1.join(['type=button', 'pos=6,66,180,0', 'cap=Color of infos'])]
-            +[c1.join(['type=check', 'pos=186,66,400,0', 'cap=Colored info bookmarks', 'val='+val_bk_info])]
-            +[c1.join(['type=check', 'pos=6,100,400,0', 'cap=Do linting on opening file', 'val='+val_ev_open])]
-            +[c1.join(['type=check', 'pos=6,126,400,0', 'cap=Do linting after text changed', 'val='+val_ev_ch])]
+            +[c1.join(['type=button', 'pos=6,6,180,0', 'cap=Color of &errors'])]
+            +[c1.join(['type=check', 'pos=186,6,400,0', 'cap=Colored e&rror bookmarks', 'val='+str(int(opt.color_error_use))])]
+            +[c1.join(['type=button', 'pos=6,36,180,0', 'cap=Color of &warns'])]
+            +[c1.join(['type=check', 'pos=186,36,400,0', 'cap=Colored warn &bookmarks', 'val='+str(int(opt.color_warn_use))])]
+            +[c1.join(['type=button', 'pos=6,66,180,0', 'cap=Color of &infos'])]
+            +[c1.join(['type=check', 'pos=186,66,400,0', 'cap=Colored info boo&kmarks', 'val='+str(int(opt.color_info_use))])]
+            +[c1.join(['type=check', 'pos=6,100,400,0', 'cap=Do linting on &opening file', 'val='+str(int(opt.use_on_open))])]
+            +[c1.join(['type=check', 'pos=6,126,400,0', 'cap=Do linting &after text changed', 'val='+str(int(opt.use_on_change))])]
             +[c1.join(['type=button', 'pos=206,156,300,0', 'cap=OK', 'props=1'])]
             +[c1.join(['type=button', 'pos=306,156,400,0', 'cap=Cancel'])]
             )
