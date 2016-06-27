@@ -6,7 +6,8 @@ import cudatext_cmd as cmds
 sys.path.append(os.path.dirname(__file__))
 from SublimeLinter.lint.linter import linter_classes
 
-from . import cuda_lint_options as opt
+import cuda_lint_options as opt
+import cuda_lint_opt_dialog as dlg
 
 def do_register_events():
     ev = []
@@ -73,4 +74,5 @@ class Command:
         do_register_events()
         
     def config(self):
-        app.file_open(opt.fn_ini)
+        dlg.do_options_dlg()
+        
