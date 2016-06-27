@@ -1,6 +1,9 @@
 
+2016.06.26
++ dialog for opts
+
 1.0.2
-+ hints shown on bookmark icons mouse-over
++ hints on bookmark icons
  
 1.0.0 (feb 2016)
 init

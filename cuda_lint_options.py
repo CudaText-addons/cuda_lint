@@ -8,6 +8,11 @@ KIND_INFO = 22
 color_error = 0
 color_warn = 0
 color_info = 0
+
+color_error_use = True
+color_warn_use = True
+color_info_use = True
+
 use_on_open = False
 use_on_change = False
 
@@ -31,13 +36,16 @@ def html_to_int(s):
 def int_to_html(n):
     s = '%06x' % n
     r, g, b = s[4:], s[2:4], s[:2]
-    return '#%02x%02x%02x' % (b, g, r)
+    return '#'+r+g+b
 #------------------------    
 
 def do_options_load():
     global color_error
     global color_warn
     global color_info
+    global color_error_use
+    global color_warn_use
+    global color_info_use
     global use_on_open
     global use_on_change
     
@@ -45,6 +53,10 @@ def do_options_load():
     color_warn = html_to_int(app.ini_read(fn_ini, 'colors', 'warn', '#ffff00'))
     color_info = html_to_int(app.ini_read(fn_ini, 'colors', 'info', '#a6caf0'))
 
+    color_error_use = app.ini_read(fn_ini, 'colors', 'error_use', '1')=='1'
+    color_warn_use = app.ini_read(fn_ini, 'colors', 'warn_use', '1')=='1'
+    color_info_use = app.ini_read(fn_ini, 'colors', 'info_use', '1')=='1'
+    
     use_on_open = app.ini_read(fn_ini, 'events', 'on_open', '0')=='1'
     use_on_change = app.ini_read(fn_ini, 'events', 'on_change', '0')=='1'
 
@@ -52,6 +64,9 @@ def do_options_save():
     global color_error
     global color_warn
     global color_info
+    global color_error_use
+    global color_warn_use
+    global color_info_use
     global use_on_open
     global use_on_change
     
@@ -59,6 +74,10 @@ def do_options_save():
     app.ini_write(fn_ini, 'colors', 'warn', int_to_html(color_warn))
     app.ini_write(fn_ini, 'colors', 'info', int_to_html(color_info))
 
+    app.ini_write(fn_ini, 'colors', 'error_use', '1' if color_error_use else '0')
+    app.ini_write(fn_ini, 'colors', 'warn_use', '1' if color_warn_use else '0')
+    app.ini_write(fn_ini, 'colors', 'info_use', '1' if color_info_use else '0')
+    
     app.ini_write(fn_ini, 'events', 'on_open', '1' if use_on_open else '0')
     app.ini_write(fn_ini, 'events', 'on_change', '1' if use_on_change else '0')
 

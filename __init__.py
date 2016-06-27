@@ -9,11 +9,11 @@ from SublimeLinter.lint.linter import linter_classes
 import cuda_lint_options as opt
 import cuda_lint_opt_dialog as dlg
 
-def do_register_events():
+def do_register_events(can_unreg=False):
     ev = []
     if opt.use_on_open: ev+=['on_open']
     if opt.use_on_change: ev+=['on_change_slow']
-    if ev:
+    if can_unreg or ev:
         ev_list = ','.join(ev)
         print('CudaLint registers events:', ev_list) 
         app.app_proc(app.PROC_SET_EVENTS, 'cuda_lint;' + ev_list+';')
