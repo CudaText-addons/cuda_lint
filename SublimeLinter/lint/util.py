@@ -21,6 +21,7 @@ from threading import Timer
 import shutil
 import subprocess
 import tempfile
+import platform
 
 #
 # Public constants
@@ -137,7 +138,7 @@ def find_executable(executable):
 
     env = create_environment()
     path_list = env.get('PATH', '').split(os.pathsep)
-    path_list.append(os.path.join(cudatext.app_path(cudatext.APP_DIR_EXE), 'exe_tools'))
+    ###path_list.append(os.path.join(cudatext.app_path(cudatext.APP_DIR_EXE), 'exe_tools'))
 
     for base in path_list:
         path = os.path.join(os.path.expanduser(base), executable)
@@ -169,7 +170,7 @@ def open_directory(path):
 
 def run_shell_cmd(cmd, output_stream = STREAM_STDOUT):
     '''Run a shell command and return stdout.'''
-    proc = popen(cmd, output_stream, env = os.environ)
+    proc = popen(cmd, output_stream, env = create_environment())
     if proc is not None:
         timeout = {'value': False}
         timer = Timer(10, kill_proc, [proc, timeout])
@@ -204,6 +205,10 @@ def create_environment():
     # before sending to stdin, so we have to make sure stdin
     # in the target executable is looking for utf-8.
     env['PYTHONIOENCODING'] = 'utf8'
+
+    # Trick from "Tern for Sublime" plugin, needed for macOS
+    if platform.system() == "Darwin":
+        env["PATH"] += ":/usr/local/bin"
 
     return env
 
