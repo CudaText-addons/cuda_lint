@@ -1,4 +1,8 @@
 
+2016.06.29
++ macOS: add /usr/local/bin to environment-copy PATH
+* don't add [Cudatext]/exe_tools to search-path
+
 2016.06.26
 + dialog for opts
 
