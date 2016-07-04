@@ -17,7 +17,7 @@ from numbers import Number
 
 import cudatext as app
 from . import util
-from cuda_lint_options import KIND_ERROR, KIND_WARN, KIND_INFO
+from .options import KIND_ERROR, KIND_WARN, KIND_INFO
 
 WARNING = 'warning'
 ERROR = 'error'

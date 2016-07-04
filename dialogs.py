@@ -1,5 +1,5 @@
 ﻿import cudatext as app
-import cuda_lint_options as opt
+from . import options as opt
 
 def do_options_dlg():
     id_color_err=0

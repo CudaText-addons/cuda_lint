@@ -3,17 +3,16 @@ import os
 import cudatext as app
 import cudatext_cmd as cmds
 
-sys.path.append(os.path.dirname(__file__))
-from SublimeLinter.lint.linter import linter_classes
-
-import cuda_lint_options as opt
-import cuda_lint_opt_dialog as dlg
+from .linter import Linter, linter_classes
+from .python_linter import PythonLinter
+from . import options
+from . import dialogs
 
 
 def do_register_events(can_unreg=False):
     ev = []
-    if opt.use_on_open: ev+=['on_open']
-    if opt.use_on_change: ev+=['on_change_slow']
+    if options.use_on_open: ev+=['on_open']
+    if options.use_on_change: ev+=['on_change_slow']
     if can_unreg or ev:
         ev_list = ','.join(ev)
         print('CudaLint registers events:', ev_list)
@@ -79,7 +78,7 @@ class Command:
         do_register_events()
 
     def config(self):
-        dlg.do_options_dlg()
+        dialogs.do_options_dlg()
 
     def disable(self):
         self.en = False
