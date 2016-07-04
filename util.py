@@ -15,7 +15,6 @@
 
 import os
 import re
-import cudatext
 import sys
 from threading import Timer
 import shutil
@@ -139,7 +138,6 @@ def find_executable(executable):
 
     env = create_environment()
     path_list = env.get('PATH', '').split(os.pathsep)
-    ###path_list.append(os.path.join(cudatext.app_path(cudatext.APP_DIR_EXE), 'exe_tools'))
 
     for base in path_list:
         path = os.path.join(os.path.expanduser(base), executable)
