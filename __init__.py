@@ -9,16 +9,6 @@ from . import options
 from . import dialogs
 
 
-def do_register_events(can_unreg=False):
-    ev = []
-    if options.use_on_open: ev+=['on_open']
-    if options.use_on_change: ev+=['on_change_slow']
-    if can_unreg or ev:
-        ev_list = ','.join(ev)
-        print('CudaLint registers events:', ev_list)
-        app.app_proc(app.PROC_SET_EVENTS, 'cuda_lint;' + ev_list+';')
-
-
 class Command:
     en = True
     def __init__(self):
@@ -63,22 +53,23 @@ class Command:
                 app.msg_status('No linters installed for "%s"' % lexer)
 
     def on_open(self, ed_self):
-        self.do_lint(ed_self)
+        if options.use_on_open:
+            self.do_lint(ed_self)
 
     def on_save(self, ed_self):
-        self.do_lint(ed_self)
+        if options.use_on_save:
+            self.do_lint(ed_self)
 
     def on_change_slow(self, ed_self):
-        self.do_lint(ed_self)
+        if options.use_on_change:
+            self.do_lint(ed_self)
 
     def run(self):
         self.do_lint(app.ed, True)
 
-    def on_start(self, ed_self):
-        do_register_events()
-
     def config(self):
         dialogs.do_options_dlg()
+        
 
     def disable(self):
         self.en = False

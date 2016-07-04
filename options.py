@@ -14,6 +14,7 @@ color_warn_use = True
 color_info_use = True
 
 use_on_open = False
+use_on_save = False
 use_on_change = False
 
 fn_ini = os.path.join(app.app_path(app.APP_DIR_SETTINGS), 'cuda_lint.ini')
@@ -47,6 +48,7 @@ def do_options_load():
     global color_warn_use
     global color_info_use
     global use_on_open
+    global use_on_save
     global use_on_change
     
     color_error = html_to_int(app.ini_read(fn_ini, 'colors', 'error', '#ff00ff'))
@@ -58,6 +60,7 @@ def do_options_load():
     color_info_use = app.ini_read(fn_ini, 'colors', 'info_use', '1')=='1'
     
     use_on_open = app.ini_read(fn_ini, 'events', 'on_open', '0')=='1'
+    use_on_save = app.ini_read(fn_ini, 'events', 'on_save', '0')=='1'
     use_on_change = app.ini_read(fn_ini, 'events', 'on_change', '0')=='1'
 
 def do_options_save():
@@ -68,6 +71,7 @@ def do_options_save():
     global color_warn_use
     global color_info_use
     global use_on_open
+    global use_on_save
     global use_on_change
     
     app.ini_write(fn_ini, 'colors', 'error', int_to_html(color_error))
@@ -79,6 +83,7 @@ def do_options_save():
     app.ini_write(fn_ini, 'colors', 'info_use', str(int(color_info_use)))
     
     app.ini_write(fn_ini, 'events', 'on_open', str(int(use_on_open)))
+    app.ini_write(fn_ini, 'events', 'on_save', str(int(use_on_save)))
     app.ini_write(fn_ini, 'events', 'on_change', str(int(use_on_change)))
 
 do_options_load()
