@@ -22,6 +22,7 @@ import shutil
 import subprocess
 import tempfile
 import platform
+from numbers import Number
 
 #
 # Public constants

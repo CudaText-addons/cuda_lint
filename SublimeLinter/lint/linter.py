@@ -13,6 +13,7 @@
 import os
 import re
 import shlex
+from numbers import Number
 
 import cudatext as app
 from . import util
