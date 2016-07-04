@@ -9,17 +9,19 @@ from SublimeLinter.lint.linter import linter_classes
 import cuda_lint_options as opt
 import cuda_lint_opt_dialog as dlg
 
+
 def do_register_events(can_unreg=False):
     ev = []
     if opt.use_on_open: ev+=['on_open']
     if opt.use_on_change: ev+=['on_change_slow']
     if can_unreg or ev:
         ev_list = ','.join(ev)
-        print('CudaLint registers events:', ev_list) 
+        print('CudaLint registers events:', ev_list)
         app.app_proc(app.PROC_SET_EVENTS, 'cuda_lint;' + ev_list+';')
 
 
 class Command:
+    en = True
     def __init__(self):
         dir = app.app_path(app.APP_DIR_PY)
         dirs = os.listdir(dir)
@@ -31,6 +33,9 @@ class Command:
                 pass
 
     def do_lint(self, editor, show_panel=False):
+        if not self.en:
+            return
+            
         lexer = editor.get_prop(app.PROP_LEXER_FILE)
         for linterName in linter_classes:
             Linter = linter_classes[linterName]
@@ -72,7 +77,25 @@ class Command:
 
     def on_start(self, ed_self):
         do_register_events()
-        
+
     def config(self):
         dlg.do_options_dlg()
+
+    def disable(self):
+        self.en = False
+        app.msg_status('CudaLint disabled')
         
+        #clear bookmarks
+        for h in app.ed_handles():
+            e = app.Editor(h)
+            e.bookmark(app.BOOKMARK_CLEAR_ALL, 0)
+            e.bookmark(app.BOOKMARK_CLEAR_HINTS, 0)
+            
+        #clear Valid pane
+        app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
+        app.app_log(app.LOG_CLEAR, '')
+        
+
+    def enable(self):
+        self.en = True
+        app.msg_status('CudaLint enabled')

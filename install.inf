@@ -18,3 +18,18 @@ method=run
 section=commands
 caption=CudaLint\Config...
 method=config
+
+[item10]
+section=commands
+caption=CudaLint\-
+method=_
+
+[item11]
+section=commands
+caption=CudaLint\Disable, clear marks
+method=disable
+
+[item12]
+section=commands
+caption=CudaLint\Enable
+method=enable
