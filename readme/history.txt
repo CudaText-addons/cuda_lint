@@ -1,4 +1,7 @@
 
+2016.07.07
++ commd "Lint, goto 1st mark"
+
 2016.07.05
 + reorganized modules; instead of SublimeLinter.lint use cuda_lint
 + option "lint on save"

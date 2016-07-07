@@ -16,6 +16,11 @@ method=run
 
 [item3]
 section=commands
+caption=CudaLint\Lint, go to first mark
+method=run_goto
+
+[item6]
+section=commands
 caption=CudaLint\Config...
 method=config
 

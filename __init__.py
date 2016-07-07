@@ -67,6 +67,12 @@ class Command:
     def run(self):
         self.do_lint(app.ed, True)
 
+    def run_goto(self):
+        self.run()
+        items = app.ed.bookmark(app.BOOKMARK_GET_LIST, 0)
+        if items:
+            app.ed.set_caret(0, items[0])
+
     def config(self):
         dialogs.do_options_dlg()
         
