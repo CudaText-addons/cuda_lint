@@ -655,7 +655,7 @@ class Linter(metaclass=LinterMeta):
                 bm[line] = (line-1, bm_kind, message)
                 error_count += 1
 
-            self.view.bookmark(app.BOOKMARK_CLEAR_HINTS, 0)     
+            self.view.bookmark(app.BOOKMARK_CLEAR_ALL, 0)
             for line in bm:
                 self.view.bookmark(app.BOOKMARK_SET, bm[line][0], bm[line][1], -1, bm[line][2])
 

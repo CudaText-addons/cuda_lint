@@ -1,3 +1,6 @@
+2018.02.12
+* del deprecated api BOOKMARK_CLEAR_HINTS
+* fix work with many tabs
 
 2016.07.07
 + commd "Lint, goto 1st mark"
