@@ -8,9 +8,21 @@ from .python_linter import PythonLinter
 from . import options
 from . import dialogs
 
+ID_LAST_TAB = 0
+
+
+def get_current_tab():
+    app.ed.set_prop(app.PROP_TAG, 'current')
+    for h in app.ed_handles():
+        edit = app.Editor(h)
+        if edit.get_prop(app.PROP_TAG) == 'current':
+            app.ed.set_prop(app.PROP_TAG, '')
+            return edit
+
 
 class Command:
     en = True
+
     def __init__(self):
         dir = app.app_path(app.APP_DIR_PY)
         dirs = os.listdir(dir)
@@ -24,7 +36,7 @@ class Command:
     def do_lint(self, editor, show_panel=False):
         if not self.en:
             return
-            
+
         lexer = editor.get_prop(app.PROP_LEXER_FILE)
         for linterName in linter_classes:
             Linter = linter_classes[linterName]
@@ -65,8 +77,13 @@ class Command:
             self.do_lint(ed_self)
 
     def on_focus(self, ed_self):
+        global ID_LAST_TAB
         if options.use_on_change:
-            self.do_lint(ed_self)
+            ID_CURRENT_TAB = get_current_tab().get_prop(app.PROP_TAB_ID)
+            if ID_LAST_TAB != ID_CURRENT_TAB:
+                ID_LAST_TAB = ID_CURRENT_TAB
+                self.clear_valid_pan() if self.en
+                self.do_lint(ed_self)
 
     def run(self):
         self.do_lint(app.ed, True)
@@ -88,7 +105,9 @@ class Command:
         for h in app.ed_handles():
             e = app.Editor(h)
             e.bookmark(app.BOOKMARK_CLEAR_ALL, 0)
+        self.clear_valid_pan()
 
+    def clear_valid_pan(self):
         # clear Valid pane
         app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
         app.app_log(app.LOG_CLEAR, '')
