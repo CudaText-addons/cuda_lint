@@ -82,7 +82,8 @@ class Command:
             ID_CURRENT_TAB = get_current_tab().get_prop(app.PROP_TAB_ID)
             if ID_LAST_TAB != ID_CURRENT_TAB:
                 ID_LAST_TAB = ID_CURRENT_TAB
-                self.clear_valid_pan() if self.en
+                if self.en:
+                    self.clear_valid_pan()
                 self.do_lint(ed_self)
 
     def run(self):
