@@ -8,17 +8,6 @@ from .python_linter import PythonLinter
 from . import options
 from . import dialogs
 
-ID_LAST_TAB = 0
-
-
-def get_current_tab():
-    app.ed.set_prop(app.PROP_TAG, 'current')
-    for h in app.ed_handles():
-        edit = app.Editor(h)
-        if edit.get_prop(app.PROP_TAG) == 'current':
-            app.ed.set_prop(app.PROP_TAG, '')
-            return edit
-
 
 class Command:
     en = True
@@ -52,7 +41,6 @@ class Command:
                     error_count = linter.lint()
                     if error_count > 0:
                         if show_panel:
-                            # app.ed.focus()
                             app.ed.cmd(cmds.cmd_ShowPanelValidate)
                             app.ed.focus()
                         app.msg_status('Linter "%s" found %d error(s)' % (linter.name, error_count))
@@ -61,6 +49,7 @@ class Command:
                             app.msg_status('Linter "%s" found no errors' % linter.name)
                     return
         else:
+            self.clear_valid_pan()
             if show_panel:
                 app.msg_status('No linters installed for "%s"' % lexer)
 
@@ -76,15 +65,9 @@ class Command:
         if options.use_on_change:
             self.do_lint(ed_self)
 
-    def on_focus(self, ed_self):
-        global ID_LAST_TAB
+    def on_tab_change(self, ed_self):
         if options.use_on_change:
-            ID_CURRENT_TAB = get_current_tab().get_prop(app.PROP_TAB_ID)
-            if ID_LAST_TAB != ID_CURRENT_TAB:
-                ID_LAST_TAB = ID_CURRENT_TAB
-                if self.en:
-                    self.clear_valid_pan()
-                self.do_lint(ed_self)
+            self.do_lint(ed_self)
 
     def run(self):
         self.do_lint(app.ed, True)
@@ -98,6 +81,11 @@ class Command:
     def config(self):
         dialogs.do_options_dlg()
 
+    def clear_valid_pan(self):
+        # clear Valid pane
+        app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
+        app.app_log(app.LOG_CLEAR, '')
+
     def disable(self):
         self.en = False
         app.msg_status('CudaLint disabled')
@@ -107,11 +95,6 @@ class Command:
             e = app.Editor(h)
             e.bookmark(app.BOOKMARK_CLEAR_ALL, 0)
         self.clear_valid_pan()
-
-    def clear_valid_pan(self):
-        # clear Valid pane
-        app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
-        app.app_log(app.LOG_CLEAR, '')
 
     def enable(self):
         self.en = True
