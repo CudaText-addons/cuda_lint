@@ -1,4 +1,9 @@
 
+2018.02.24
+- fix: avoid deprecated API
+* menu item Config moved to Options/Settings-plugins
+* readme changed to .txt
+
 2016.07.07
 + commd "Lint, goto 1st mark"
 

@@ -23,6 +23,7 @@ method=run_goto
 section=commands
 caption=CudaLint\Config...
 method=config
+menu=o
 
 [item10]
 section=commands

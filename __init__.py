@@ -24,7 +24,7 @@ class Command:
     def do_lint(self, editor, show_panel=False):
         if not self.en:
             return
-            
+
         lexer = editor.get_prop(app.PROP_LEXER_FILE)
         for linterName in linter_classes:
             Linter = linter_classes[linterName]
@@ -75,22 +75,21 @@ class Command:
 
     def config(self):
         dialogs.do_options_dlg()
-        
+
 
     def disable(self):
         self.en = False
         app.msg_status('CudaLint disabled')
-        
+
         #clear bookmarks
         for h in app.ed_handles():
             e = app.Editor(h)
             e.bookmark(app.BOOKMARK_CLEAR_ALL, 0)
-            e.bookmark(app.BOOKMARK_CLEAR_HINTS, 0)
-            
+
         #clear Valid pane
         app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
         app.app_log(app.LOG_CLEAR, '')
-        
+
 
     def enable(self):
         self.en = True
