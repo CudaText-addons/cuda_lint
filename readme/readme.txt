@@ -17,13 +17,19 @@ Linux: "nodejs" package must be installed, command "nodejs -v" must work in cons
 
 === Usage ===
 
-To call linting, use menu item "Plugins - CudaLint - Lint" or set hotkey to this item (Commands dialog, F9 key). You will see statusbar message, which tells how many errors linter found. For each found error, you'll see yellow or red bookmark on error line (these are unnumbered bookmarks, so use standard commands to work with bookmarks). Plugin also shows list of errors in the "Validate" panel (if found).
+To run linting, use menu item "Plugins / CudaLint / Lint", or set hotkey to this item (F1/Commands dialog, then F9 key). You will see statusbar message, which tells how many errors linter found. For each found error, you'll see yellow or red bookmark (you can use usual commands for these bookmarks). Plugin also shows list of errors in the "Validate" panel.
 
-Linting can be called by events: on open file, on change text. Events aren't used by default (to not slowdown usual work). To use events, you must enable them in config ("Plugins - CudaLint - Config" menu item).
+Linting can be run by events: 
+- on opening file
+- on saving file
+- after text change + pause
+Events aren't used by default (to not slowdown usual work). To use events, you must enable them in config. Call config by menu item in "Options / Settings-plugins".
 
 === About ===
 
-Authors: Alexey Torgashin, tbeu (http://tbeu.de)
+Authors:
+  Alexey Torgashin
+  tbeu (http://tbeu.de)
 
 CudaLint uses code portions from the SublimeLinter 3 project.
 License: MIT
