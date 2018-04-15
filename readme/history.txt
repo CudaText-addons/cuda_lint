@@ -1,10 +1,8 @@
-2018.02.13
-* fix bug: cuda_Exttools didn't work correct with enabled cuda_lint
-* fix work with tabs that don't have linters
 
-2018.02.12
-* del deprecated api BOOKMARK_CLEAR_HINTS
-* fix work with many tabs
+2018.04.15 (patches by OlehL)
+- fix: plugin ExtTools didn't work correct with enabled CudaLint
+- fix: work with tabs that don't have linters
+- fix: avoid deprecated API
 
 2018.02.24
 - fix: avoid deprecated API
