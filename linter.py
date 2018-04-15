@@ -660,7 +660,7 @@ class Linter(metaclass=LinterMeta):
                 self.view.bookmark(app.BOOKMARK_SET, bm[line][0], bm[line][1], -1, bm[line][2])
 
         return error_count
-        
+
 
     def run(self, cmd, code):
         """
