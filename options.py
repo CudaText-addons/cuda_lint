@@ -19,7 +19,7 @@ use_on_change = False
 
 fn_ini = os.path.join(app.app_path(app.APP_DIR_SETTINGS), 'cuda_lint.ini')
 
-#------------------------     
+#------------------------
 def html_to_int(s):
     s = s.strip()
     if not s: return app.COLOR_NONE
@@ -38,7 +38,7 @@ def int_to_html(n):
     s = '%06x' % n
     r, g, b = s[4:], s[2:4], s[:2]
     return '#'+r+g+b
-#------------------------    
+#------------------------
 
 def do_options_load():
     global color_error
@@ -50,7 +50,7 @@ def do_options_load():
     global use_on_open
     global use_on_save
     global use_on_change
-    
+
     color_error = html_to_int(app.ini_read(fn_ini, 'colors', 'error', '#ff00ff'))
     color_warn = html_to_int(app.ini_read(fn_ini, 'colors', 'warn', '#ffff00'))
     color_info = html_to_int(app.ini_read(fn_ini, 'colors', 'info', '#a6caf0'))
@@ -58,12 +58,12 @@ def do_options_load():
     color_error_use = app.ini_read(fn_ini, 'colors', 'error_use', '1')=='1'
     color_warn_use = app.ini_read(fn_ini, 'colors', 'warn_use', '1')=='1'
     color_info_use = app.ini_read(fn_ini, 'colors', 'info_use', '1')=='1'
-    
+
     use_on_open = app.ini_read(fn_ini, 'events', 'on_open', '0')=='1'
     use_on_save = app.ini_read(fn_ini, 'events', 'on_save', '0')=='1'
     use_on_change = app.ini_read(fn_ini, 'events', 'on_change', '0')=='1'
 
-def apply_settings():
+def do_options_apply():
     fn_warn = os.path.join(os.path.dirname(__file__), 'icons', 'bookmark_warn.bmp')
     fn_error = os.path.join(os.path.dirname(__file__), 'icons', 'bookmark_err.bmp')
 
@@ -81,7 +81,7 @@ def do_options_save():
     global use_on_open
     global use_on_save
     global use_on_change
-    
+
     app.ini_write(fn_ini, 'colors', 'error', int_to_html(color_error))
     app.ini_write(fn_ini, 'colors', 'warn', int_to_html(color_warn))
     app.ini_write(fn_ini, 'colors', 'info', int_to_html(color_info))
@@ -89,11 +89,12 @@ def do_options_save():
     app.ini_write(fn_ini, 'colors', 'error_use', str(int(color_error_use)))
     app.ini_write(fn_ini, 'colors', 'warn_use', str(int(color_warn_use)))
     app.ini_write(fn_ini, 'colors', 'info_use', str(int(color_info_use)))
-    
+
     app.ini_write(fn_ini, 'events', 'on_open', str(int(use_on_open)))
     app.ini_write(fn_ini, 'events', 'on_save', str(int(use_on_save)))
     app.ini_write(fn_ini, 'events', 'on_change', str(int(use_on_change)))
-    apply_settings()
+
+    do_options_apply()
 
 do_options_load()
-apply_settings()
+do_options_apply()
