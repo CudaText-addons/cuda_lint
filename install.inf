@@ -7,7 +7,7 @@ homepage=https://github.com/CudaText-addons/cuda_lint
 
 [item1]
 section=events
-events=on_open,on_save,on_change_slow
+events=on_open,on_save,on_change_slow,on_tab_change
 
 [item2]
 section=commands

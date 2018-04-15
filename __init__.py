@@ -11,6 +11,7 @@ from . import dialogs
 
 class Command:
     en = True
+
     def __init__(self):
         dir = app.app_path(app.APP_DIR_PY)
         dirs = os.listdir(dir)
@@ -40,7 +41,6 @@ class Command:
                     error_count = linter.lint()
                     if error_count > 0:
                         if show_panel:
-                            #app.ed.focus()
                             app.ed.cmd(cmds.cmd_ShowPanelValidate)
                             app.ed.focus()
                         app.msg_status('Linter "%s" found %d error(s)' % (linter.name, error_count))
@@ -49,6 +49,7 @@ class Command:
                             app.msg_status('Linter "%s" found no errors' % linter.name)
                     return
         else:
+            self.clear_valid_pan()
             if show_panel:
                 app.msg_status('No linters installed for "%s"' % lexer)
 
@@ -64,6 +65,10 @@ class Command:
         if options.use_on_change:
             self.do_lint(ed_self)
 
+    def on_tab_change(self, ed_self):
+        if options.use_on_change:
+            self.do_lint(ed_self)
+
     def run(self):
         self.do_lint(app.ed, True)
 
@@ -76,20 +81,20 @@ class Command:
     def config(self):
         dialogs.do_options_dlg()
 
+    def clear_valid_pan(self):
+        # clear Valid pane
+        app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
+        app.app_log(app.LOG_CLEAR, '')
 
     def disable(self):
         self.en = False
         app.msg_status('CudaLint disabled')
 
-        #clear bookmarks
+        # clear bookmarks
         for h in app.ed_handles():
             e = app.Editor(h)
             e.bookmark(app.BOOKMARK_CLEAR_ALL, 0)
-
-        #clear Valid pane
-        app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
-        app.app_log(app.LOG_CLEAR, '')
-
+        self.clear_valid_pan()
 
     def enable(self):
         self.en = True
