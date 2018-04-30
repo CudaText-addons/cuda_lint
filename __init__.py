@@ -10,12 +10,12 @@ from . import dialogs
 
 
 def get_project_linter(lexer):
-    '''Gets linter module name, from lexer name'''
     if not lexer: return
 
     try:
         import cuda_project_man
     except ImportError:
+        print('CudaLint cannot import cuda_project_man')
         return
 
     v = cuda_project_man.project_variables()
