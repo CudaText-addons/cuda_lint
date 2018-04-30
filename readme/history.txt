@@ -1,4 +1,7 @@
 
+2018.04.30
++ support for per-project linters. See file readme/linter_per_project.txt.
+
 2018.04.15 (patches by OlehL)
 - fix: plugin ExtTools didn't work correct with enabled CudaLint
 - fix: work with tabs that don't have linters

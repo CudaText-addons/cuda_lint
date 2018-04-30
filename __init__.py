@@ -9,6 +9,20 @@ from . import options
 from . import dialogs
 
 
+def get_project_linter(lexer):
+    '''Gets linter module name, from lexer name'''
+    if not lexer: return
+
+    try:
+        import cuda_project_man
+    except ImportError:
+        return
+
+    v = cuda_project_man.project_variables()
+    if v:
+        return v.get('linter_'+lexer.lower())
+
+
 class Command:
     en = True
 
@@ -27,6 +41,8 @@ class Command:
             return
 
         lexer = editor.get_prop(app.PROP_LEXER_FILE)
+        proj_linter = get_project_linter(lexer)
+
         for linterName in linter_classes:
             Linter = linter_classes[linterName]
 
@@ -34,6 +50,14 @@ class Command:
                 match = lexer in Linter.syntax
             else:
                 match = lexer == Linter.syntax
+
+            if match and proj_linter:
+                dir = Linter.__module__.split('.')[0] #was 'cuda_lint_nnn.linter'
+                prefix = 'cuda_lint_'
+                if dir.startswith(prefix):
+                    dir = dir[len(prefix):]
+                #print('Checking linter:', dir)
+                match = dir==proj_linter
 
             if match:
                 if not Linter.disabled:
@@ -51,7 +75,11 @@ class Command:
         else:
             self.clear_valid_pan()
             if show_panel:
-                app.msg_status('No linters installed for "%s"' % lexer)
+                if proj_linter:
+                    s = 'Project\'s required linter not found: %s' % proj_linter
+                else:
+                    s = 'No linters for lexer "%s"' % lexer
+                app.msg_status(s)
 
     def on_open(self, ed_self):
         if options.use_on_open:
@@ -99,3 +127,4 @@ class Command:
     def enable(self):
         self.en = True
         app.msg_status('CudaLint enabled')
+
