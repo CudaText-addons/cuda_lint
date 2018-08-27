@@ -16,6 +16,7 @@ def get_project_linter(lexer):
     try:
         import cuda_project_man
     except ImportError:
+        print('CudaLint cannot import cuda_project_man')
         return
 
     v = cuda_project_man.project_variables()
@@ -111,8 +112,8 @@ class Command:
 
     def clear_valid_pan(self):
         # clear Valid pane
-        app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
-        app.app_log(app.LOG_CLEAR, '')
+        # app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
+        app.app_log(app.LOG_CLEAR, '', panel=app.LOG_PANEL_VALIDATE)
 
     def disable(self):
         self.en = False
