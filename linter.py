@@ -617,7 +617,6 @@ class Linter(metaclass=LinterMeta):
         if self.filename:
             os.chdir(cwd)
 
-        # app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
         app.app_log(app.LOG_CLEAR, '', panel=app.LOG_PANEL_VALIDATE)
         app.app_log(app.LOG_SET_FILENAME, self.filename, panel=app.LOG_PANEL_VALIDATE)
         app.app_log(app.LOG_SET_LINE_ID, '1', panel=app.LOG_PANEL_VALIDATE)

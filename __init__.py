@@ -111,8 +111,6 @@ class Command:
         dialogs.do_options_dlg()
 
     def clear_valid_pan(self):
-        # clear Valid pane
-        # app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
         app.app_log(app.LOG_CLEAR, '', panel=app.LOG_PANEL_VALIDATE)
 
     def disable(self):
