@@ -617,13 +617,12 @@ class Linter(metaclass=LinterMeta):
         if self.filename:
             os.chdir(cwd)
 
-        app.app_log(app.LOG_SET_PANEL, app.LOG_PANEL_VALIDATE)
-        app.app_log(app.LOG_CLEAR, '')
-        app.app_log(app.LOG_SET_FILENAME, self.filename)
-        app.app_log(app.LOG_SET_LINE_ID, '1')
-        app.app_log(app.LOG_SET_COL_ID, '2')
-        app.app_log(app.LOG_SET_ZEROBASE, '0')
-        app.app_log(app.LOG_SET_REGEX, 'Line (\d+) Col (\d+):.+')
+        app.app_log(app.LOG_CLEAR, '', panel=app.LOG_PANEL_VALIDATE)
+        app.app_log(app.LOG_SET_FILENAME, self.filename, panel=app.LOG_PANEL_VALIDATE)
+        app.app_log(app.LOG_SET_LINE_ID, '1', panel=app.LOG_PANEL_VALIDATE)
+        app.app_log(app.LOG_SET_COL_ID, '2', panel=app.LOG_PANEL_VALIDATE)
+        app.app_log(app.LOG_SET_ZEROBASE, '0', panel=app.LOG_PANEL_VALIDATE)
+        app.app_log(app.LOG_SET_REGEX, 'Line (\d+) Col (\d+):.+', panel=app.LOG_PANEL_VALIDATE)
 
         m = []
         error_list = self.find_errors(output)
@@ -650,7 +649,9 @@ class Linter(metaclass=LinterMeta):
 
                 if col is None:
                     col = 1
-                app.app_log(app.LOG_ADD, 'Line {} Col {}: {}'.format(line, col, message))
+                app.app_log(app.LOG_ADD,
+                            'Line {} Col {}: {}'.format(line, col, message),
+                            panel=app.LOG_PANEL_VALIDATE)
 
                 bm[line] = (line-1, bm_kind, message)
                 error_count += 1
