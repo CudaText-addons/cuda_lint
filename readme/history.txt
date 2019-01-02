@@ -1,3 +1,7 @@
+
+2019.01.02
++ add: new bookmark icons (red/yellow)
+
 2018.08.17
 - fix: avoid deprecated API
 
