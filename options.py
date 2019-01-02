@@ -64,8 +64,8 @@ def do_options_load():
     use_on_change = app.ini_read(fn_ini, 'events', 'on_change', '0')=='1'
 
 def do_options_apply():
-    fn_warn = os.path.join(os.path.dirname(__file__), 'icons', 'bookmark_warn.bmp')
-    fn_error = os.path.join(os.path.dirname(__file__), 'icons', 'bookmark_err.bmp')
+    fn_warn = os.path.join(os.path.dirname(__file__), 'icons', 'bookmark_warn.png')
+    fn_error = os.path.join(os.path.dirname(__file__), 'icons', 'bookmark_err.png')
 
     app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_ERROR, color_error if color_error_use else app.COLOR_NONE, fn_error)
     app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_WARN, color_warn if color_warn_use else app.COLOR_NONE, fn_warn)
