@@ -1,6 +1,8 @@
 import os
 import cudatext as app
 
+MY_TAG = 110 #uniq value for all ed.bookmark() plugins
+
 KIND_ERROR = 20
 KIND_WARN = 21
 KIND_INFO = 22

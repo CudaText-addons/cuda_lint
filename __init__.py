@@ -102,9 +102,11 @@ class Command:
 
     def run_goto(self):
         self.run()
-        items = app.ed.bookmark(app.BOOKMARK_GET_LIST, 0)
+        items = app.ed.bookmark(app.BOOKMARK_GET_ALL, 0)
         if items:
-            app.ed.set_caret(0, items[0])
+            for item in items:
+                if item['tag']==options.MY_TAG:
+                    app.ed.set_caret(0, item['line'])
 
     def config(self):
         dialogs.do_options_dlg()
@@ -119,7 +121,7 @@ class Command:
         # clear bookmarks
         for h in app.ed_handles():
             e = app.Editor(h)
-            e.bookmark(app.BOOKMARK_CLEAR_ALL, 0)
+            e.bookmark(app.BOOKMARK_DELETE_BY_TAG, 0, tag=options.MY_TAG)
         self.clear_valid_pan()
 
     def enable(self):

@@ -17,7 +17,7 @@ from numbers import Number
 
 import cudatext as app
 from . import util
-from .options import KIND_ERROR, KIND_WARN, KIND_INFO
+from .options import KIND_ERROR, KIND_WARN, KIND_INFO, MY_TAG
 
 WARNING = 'warning'
 ERROR = 'error'
@@ -610,7 +610,7 @@ class Linter(metaclass=LinterMeta):
 
         output = self.run(cmd, self.view.get_text_all())
 
-        self.view.bookmark(app.BOOKMARK_CLEAR_ALL, 0)
+        self.view.bookmark(app.BOOKMARK_DELETE_BY_TAG, 0, tag=MY_TAG)
         if not output:
             return 0
 
@@ -656,9 +656,14 @@ class Linter(metaclass=LinterMeta):
                 bm[line] = (line-1, bm_kind, message)
                 error_count += 1
 
-            self.view.bookmark(app.BOOKMARK_CLEAR_ALL, 0)
+            self.view.bookmark(app.BOOKMARK_DELETE_BY_TAG, 0, tag=MY_TAG)
             for line in bm:
-                self.view.bookmark(app.BOOKMARK_SET, bm[line][0], bm[line][1], -1, bm[line][2])
+                self.view.bookmark(app.BOOKMARK_SET, 
+                    nline=bm[line][0], 
+                    nkind=bm[line][1], 
+                    text=bm[line][2],
+                    tag=MY_TAG
+                    )
 
         return error_count
 
