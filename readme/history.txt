@@ -1,4 +1,7 @@
 
+2019.01.10
+- fix: plugin was deleting usual bookmarks on linting
+
 2019.01.02
 + add: new bookmark icons (red/yellow)
 
