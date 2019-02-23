@@ -258,7 +258,7 @@ def tmpfile(cmd, code, suffix='', output_stream=STREAM_STDOUT, env=None):
     f = None
 
     try:
-        with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as f:
+        with tempfile.NamedTemporaryFile(suffix=suffix, prefix='_CudaLint_', delete=False) as f:
             if isinstance(code, str):
                 code = code.encode('utf-8')
 
