@@ -1,4 +1,7 @@
 
+2019.05.25
+- fix: lint marks must not be visible in "Go to bookmark" dialog
+
 2019.02.23
 + add: temporary files have prefix "_CudaLint_", needed for some linters
 

@@ -662,7 +662,8 @@ class Linter(metaclass=LinterMeta):
                     nline=bm[line][0], 
                     nkind=bm[line][1], 
                     text=bm[line][2],
-                    tag=MY_TAG
+                    tag=MY_TAG,
+                    show=False
                     )
 
         return error_count
