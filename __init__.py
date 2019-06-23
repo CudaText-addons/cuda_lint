@@ -44,8 +44,7 @@ class Command:
         proj_linter = get_project_linter(lexer)
 
         avail = []
-        for linterName in linter_classes:
-            Linter = linter_classes[linterName]
+        for (linterName, Linter) in linter_classes.items():
 
             if isinstance(Linter.syntax, (tuple, list)):
                 match = lexer in Linter.syntax
@@ -62,19 +61,19 @@ class Command:
 
             if match:
                 if not Linter.disabled:
-                    avail.append(Linter)
+                    avail.append((linterName, Linter))
 
         self.clear_valid_pan()
 
         if avail:
-            linters = [item(editor) for item in avail]
-            if len(linters)==1:
-                linter = linters[0]
+            if len(avail) == 1:
+                Linter = avail[0][1]
             else:
-                res = app.dlg_menu(app.MENU_LIST, [i.name for i in linters], caption='Linters for %s'%lexer)
+                res = app.dlg_menu(app.MENU_LIST, [i[0] for i in avail], caption='Linters for %s'%lexer)
                 if res is None: return
-                linter = linters[res]
+                Linter = avail[res][1]
 
+            linter = Linter(editor)
             error_count = linter.lint()
             if error_count > 0:
                 if show_panel:
