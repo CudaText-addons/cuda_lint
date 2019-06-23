@@ -43,6 +43,7 @@ class Command:
         lexer = editor.get_prop(app.PROP_LEXER_FILE)
         proj_linter = get_project_linter(lexer)
 
+        avail = []
         for linterName in linter_classes:
             Linter = linter_classes[linterName]
 
@@ -61,25 +62,36 @@ class Command:
 
             if match:
                 if not Linter.disabled:
-                    linter = Linter(editor)
-                    error_count = linter.lint()
-                    if error_count > 0:
-                        if show_panel:
-                            app.ed.cmd(cmds.cmd_ShowPanelValidate)
-                            app.ed.focus()
-                        app.msg_status('Linter "%s" found %d error(s)' % (linter.name, error_count))
-                    else:
-                        if show_panel:
-                            app.msg_status('Linter "%s" found no errors' % linter.name)
-                    return
+                    avail.append(Linter)
+
+        self.clear_valid_pan()
+
+        if avail:
+            linters = [item(editor) for item in avail]
+            if len(linters)==1:
+                linter = linters[0]
+            else:
+                res = app.dlg_menu(app.MENU_LIST, [i.name for i in linters], caption='Linters for %s'%lexer)
+                if res is None: return
+                linter = linters[res]
+
+            error_count = linter.lint()
+            if error_count > 0:
+                if show_panel:
+                    editor.cmd(cmds.cmd_ShowPanelValidate)
+                    editor.focus()
+                app.msg_status('Linter "%s" found %d error(s)' % (linter.name, error_count))
+            else:
+                if show_panel:
+                    app.msg_status('Linter "%s" found no errors' % linter.name)
         else:
-            self.clear_valid_pan()
             if show_panel:
                 if proj_linter:
                     s = 'Project\'s required linter not found: %s' % proj_linter
                 else:
                     s = 'No linters for lexer "%s"' % lexer
                 app.msg_status(s)
+
 
     def on_open(self, ed_self):
         if options.use_on_open:
