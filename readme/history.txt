@@ -1,4 +1,7 @@
 
+2019.06.23
++ support several linters per lexer: in this case plugin suggests to choose one of linters from menu-dialog
+
 2019.05.25
 - fix: lint marks must not be visible in "Go to bookmark" dialog
 
