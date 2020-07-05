@@ -93,20 +93,16 @@ class Command:
 
 
     def on_open(self, ed_self):
-        if options.use_on_open:
-            self.do_lint(ed_self)
+        self.do_lint(ed_self)
 
     def on_save(self, ed_self):
-        if options.use_on_save:
-            self.do_lint(ed_self)
+        self.do_lint(ed_self)
 
     def on_change_slow(self, ed_self):
-        if options.use_on_change:
-            self.do_lint(ed_self)
+        self.do_lint(ed_self)
 
     def on_tab_change(self, ed_self):
-        if options.use_on_change:
-            self.do_lint(ed_self)
+        self.do_lint(ed_self)
 
     def run(self):
         self.do_lint(app.ed, True)

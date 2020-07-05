@@ -4,11 +4,7 @@ desc=Linting (syntax-checking) of source code. Needs "linters" for each lexer yo
 type=cudatext-plugin
 subdir=cuda_lint
 homepage=https://github.com/CudaText-addons/cuda_lint
-api=1.0.252
-
-[item1]
-section=events
-events=on_open,on_save,on_change_slow,on_tab_change
+api=1.0.342
 
 [item2]
 section=commands

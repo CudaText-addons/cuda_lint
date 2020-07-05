@@ -1,7 +1,11 @@
-﻿import cudatext as app
+﻿import os
+import cudatext as app
 from . import options as opt
 
+p_ini = 'plugins.ini'
+
 def do_options_dlg():
+
     id_color_err=0
     id_color_warn=2
     id_color_info=4
@@ -13,6 +17,11 @@ def do_options_dlg():
     id_ev_ch=8
     id_ok=9
 
+    ev_line = app.ini_read(p_ini, 'events', 'cuda_lint', '')
+    use_on_open = ',on_open,' in ','+ev_line+','
+    use_on_save = ',on_save,' in ','+ev_line+','
+    use_on_change = ',on_change_slow,' in ','+ev_line+','
+
     while True:
         c1 = chr(1)
         text = '\n'.join([] 
@@ -22,9 +31,9 @@ def do_options_dlg():
             +[c1.join(['type=check', 'pos=186,36,400,0', 'cap=Colored warn &bookmarks', 'val='+str(int(opt.color_warn_use))])]
             +[c1.join(['type=button', 'pos=6,66,180,0', 'cap=Color of &infos'])]
             +[c1.join(['type=check', 'pos=186,66,400,0', 'cap=Colored info boo&kmarks', 'val='+str(int(opt.color_info_use))])]
-            +[c1.join(['type=check', 'pos=6,100,400,0', 'cap=Lint on &opening file', 'val='+str(int(opt.use_on_open))])]
-            +[c1.join(['type=check', 'pos=6,126,400,0', 'cap=Lint on &saving file', 'val='+str(int(opt.use_on_save))])]
-            +[c1.join(['type=check', 'pos=6,152,400,0', 'cap=Lint &after text changed, and pause', 'val='+str(int(opt.use_on_change))])]
+            +[c1.join(['type=check', 'pos=6,100,400,0', 'cap=Lint on &opening file', 'val='+str(int(use_on_open))])]
+            +[c1.join(['type=check', 'pos=6,126,400,0', 'cap=Lint on &saving file', 'val='+str(int(use_on_save))])]
+            +[c1.join(['type=check', 'pos=6,152,400,0', 'cap=Lint &after text changed, and pause', 'val='+str(int(use_on_change))])]
             +[c1.join(['type=button', 'pos=206,182,300,0', 'cap=OK', 'props=1'])]
             +[c1.join(['type=button', 'pos=306,182,400,0', 'cap=Cancel'])]
             )
@@ -57,10 +66,22 @@ def do_options_dlg():
     opt.color_warn_use = text[id_bk_warn]=='1'
     opt.color_info_use = text[id_bk_info]=='1'
     
-    opt.use_on_open = text[id_ev_open]=='1'
-    opt.use_on_save = text[id_ev_save]=='1'
-    opt.use_on_change = text[id_ev_ch]=='1'
-    
+    use_on_open = text[id_ev_open]=='1'
+    use_on_save = text[id_ev_save]=='1'
+    use_on_change = text[id_ev_ch]=='1'
+
+    ev = []
+    if use_on_open:
+        ev += ['on_open']
+    if use_on_save:
+        ev += ['on_save']
+    if use_on_change:
+        ev += ['on_change_slow', 'on_tab_change']
+    ev_line_new = ','.join(ev)
+    if ev_line!=ev_line_new:
+        app.ini_write(p_ini, 'events', 'cuda_lint', ev_line_new)
+        app.msg_box('CudaText should be restarted, to allow CudaLint use new event-options', app.MB_OK+app.MB_ICONINFO)
+        
     opt.do_options_save()
     #app.msg_box('CudaLint options changed, need to restart app', app.MB_OK+app.MB_ICONINFO)
     
