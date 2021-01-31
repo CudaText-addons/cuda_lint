@@ -1,4 +1,7 @@
 
+2021.01.31
++ add: support translations (from Markus)
+
 2020.07.05
 + use API of CudaText 1.106.5 to write events to plugins.ini; now if no event-options are checked in config dialog, CudaLint is not loaded on start
 

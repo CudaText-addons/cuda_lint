@@ -1,4 +1,4 @@
-# coding=utf8
+# coding=utf-8
 #
 # util.py
 # Part of SublimeLinter3, a code checking framework for Sublime Text 3
@@ -22,6 +22,10 @@ import subprocess
 import tempfile
 import platform
 from numbers import Number
+
+from cudax_lib import get_translation
+_   = get_translation(__file__)  # I18N
+
 
 #
 # Public constants
@@ -122,7 +126,7 @@ def which(cmd, module=None):
             result = (path, script_path, available_version['major'], available_version['minor'])
             return result
         else:
-            print('ERROR: not yet implemented.')
+            print(_('ERROR: not yet implemented.'))
             return ''
     else:
         return find_executable(cmd)
@@ -181,7 +185,7 @@ def run_shell_cmd(cmd, output_stream = STREAM_STDOUT):
         return ''
 
 def kill_proc(proc, timeout):
-    print('shell timed out after {} seconds, executing {}'.format(10, cmd))
+    print(_('shell timed out after {} seconds, executing {}').format(10, cmd))
     timeout['value'] = True
     proc.kill()
 

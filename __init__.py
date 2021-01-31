@@ -3,6 +3,9 @@ import os
 import cudatext as app
 import cudatext_cmd as cmds
 
+from cudax_lib import get_translation
+_   = get_translation(__file__)  # I18N
+
 from .linter import Linter, linter_classes
 from .python_linter import PythonLinter
 from . import options
@@ -15,7 +18,7 @@ def get_project_linter(lexer):
     try:
         import cuda_project_man
     except ImportError:
-        print('CudaLint cannot import cuda_project_man')
+        print(_('CudaLint cannot import cuda_project_man'))
         return
 
     v = cuda_project_man.project_variables()
@@ -79,16 +82,16 @@ class Command:
                 if show_panel:
                     editor.cmd(cmds.cmd_ShowPanelValidate)
                     editor.focus()
-                app.msg_status('Linter "%s" found %d error(s)' % (linter.name, error_count))
+                app.msg_status(_('Linter "{}" found {} error(s)').format(linter.name, error_count))
             else:
                 if show_panel:
-                    app.msg_status('Linter "%s" found no errors' % linter.name)
+                    app.msg_status(_('Linter "%s" found no errors') % linter.name)
         else:
             if show_panel:
                 if proj_linter:
-                    s = 'Project\'s required linter not found: %s' % proj_linter
+                    s = _('Project\'s required linter not found: %s') % proj_linter
                 else:
-                    s = 'No linters for lexer "%s"' % lexer
+                    s = _('No linters for lexer "%s"') % lexer
                 app.msg_status(s)
 
 
@@ -123,7 +126,7 @@ class Command:
 
     def disable(self):
         self.en = False
-        app.msg_status('CudaLint disabled')
+        app.msg_status(_('CudaLint disabled'))
 
         # clear bookmarks
         for h in app.ed_handles():
@@ -133,5 +136,5 @@ class Command:
 
     def enable(self):
         self.en = True
-        app.msg_status('CudaLint enabled')
+        app.msg_status(_('CudaLint enabled'))
 

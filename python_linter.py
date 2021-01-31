@@ -16,6 +16,9 @@ import re
 
 from . import linter, util
 
+from cudax_lib import get_translation
+_   = get_translation(__file__)  # I18N
+
 
 class PythonLinter(linter.Linter):
 
@@ -135,20 +138,20 @@ class PythonLinter(linter.Linter):
                             module = None
 
             except ImportError:
-                message = '{}import of {} module in {} failed'
+                message = _('{}import of {} module in {} failed')
 
                 if cls.check_version:
-                    warning = 'WARNING: '
-                    message += ', linter will not work with python 3 code'
+                    warning = _('WARNING: ')
+                    message += _(', linter will not work with python 3 code')
                 else:
                     warning = ''
-                    message += ', linter will not run using built in python'
+                    message += _(', linter will not run using built in python')
 
                 module = None
 
             except Exception as ex:
                 print(
-                    'ERROR: unknown exception in {}: {}'
+                    _('ERROR: unknown exception in {}: {}')
                     .format(cls.name, str(ex))
                 )
                 module = None
@@ -179,10 +182,10 @@ class PythonLinter(linter.Linter):
                 cls.cmd = None
         else:
             print(
-                'WARNING: {} deactivated, no available version of python{} satisfies {}'
+                _('WARNING: {} deactivated, no available version of python{} satisfies {}')
                 .format(
                     cls.name,
-                    ' or {}'.format(script) if script else '',
+                    _(' or {}').format(script) if script else '',
                     cmd
                 ))
 

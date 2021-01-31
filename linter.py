@@ -1,4 +1,4 @@
-# coding=utf8
+# coding=utf-8
 #
 # linter.py
 # Part of SublimeLinter3, a code checking framework for Sublime Text 3
@@ -18,6 +18,9 @@ from numbers import Number
 import cudatext as app
 from . import util
 from .options import KIND_ERROR, KIND_WARN, KIND_INFO, MY_TAG
+
+from cudax_lib import get_translation
+_   = get_translation(__file__)  # I18N
 
 WARNING = 'warning'
 ERROR = 'error'
@@ -68,7 +71,7 @@ class LinterMeta(type):
                     setattr(cls, 'syntax', re.compile(syntax))
             except re.error as err:
                 print(
-                    'ERROR: {} disabled, error compiling syntax: {}'
+                    _('ERROR: {} disabled, error compiling syntax: {}')
                     .format(name.lower(), str(err))
                 )
                 setattr(cls, 'disabled', True)
@@ -85,14 +88,14 @@ class LinterMeta(type):
                             setattr(cls, regex, re.compile(attr, cls.re_flags))
                         except re.error as err:
                             print(
-                                'ERROR: {} disabled, error compiling {}: {}'
+                                _('ERROR: {} disabled, error compiling {}: {}')
                                 .format(name.lower(), regex, str(err))
                             )
                             setattr(cls, 'disabled', True)
 
             if not cls.disabled:
                 if not cls.syntax or (cls.cmd is not None and not cls.cmd) or not cls.regex:
-                    print('ERROR: {} disabled, not fully implemented'.format(name.lower()))
+                    print(_('ERROR: {} disabled, not fully implemented').format(name.lower()))
                     setattr(cls, 'disabled', True)
 
             for attr in ('inline_settings', 'inline_overrides'):
@@ -447,7 +450,7 @@ class Linter(metaclass=LinterMeta):
             path = self.which(which)
 
         if not path:
-            persist.printf('ERROR: {} cannot locate \'{}\''.format(self.name, which))
+            persist.printf(_('ERROR: {} cannot locate \'{}\'').format(self.name, which))
             return ''
 
         cmd[0:1] = util.convert_type(path, [])
@@ -590,7 +593,7 @@ class Linter(metaclass=LinterMeta):
                 path = util.which(which)
 
             if not path:
-                print('ERROR: {} cannot locate \'{}\''.format(self.name, which))
+                print(_('ERROR: {} cannot locate "{}"').format(self.name, which))
                 return 0
 
             cmd[0:1] = util.convert_type(path, [])

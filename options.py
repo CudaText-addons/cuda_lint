@@ -1,6 +1,9 @@
 import os
 import cudatext as app
 
+from cudax_lib import get_translation
+_   = get_translation(__file__)  # I18N
+
 MY_TAG = 110 #uniq value for all ed.bookmark() plugins
 
 KIND_ERROR = 20
@@ -30,7 +33,7 @@ def html_to_int(s):
     if len(s)==3:
         s = s[0]*2 + s[1]*2 + s[2]*2
     if len(s)!=6:
-        raise Exception('Incorrect color token: '+s)
+        raise Exception(_('Incorrect color token: ')+s)
     s = s[-2:] + s[2:4] + s[:2]
     # finally, make it numeric
     color = int(s, 16)
