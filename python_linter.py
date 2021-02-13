@@ -300,7 +300,7 @@ class PythonLinter(linter.Linter):
         """
 
         print(
-            '{}: subclasses must override the PythonLinter.check method'
+            _('{}: subclasses must override the PythonLinter.check method')
             .format(self.name)
         )
 

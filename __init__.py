@@ -72,7 +72,7 @@ class Command:
             if len(avail) == 1:
                 Linter = avail[0][1]
             else:
-                res = app.dlg_menu(app.MENU_LIST, [i[0] for i in avail], caption='Linters for %s'%lexer)
+                res = app.dlg_menu(app.MENU_LIST, [i[0] for i in avail], caption=_('Linters for %s') % lexer)
                 if res is None: return
                 Linter = avail[res][1]
 

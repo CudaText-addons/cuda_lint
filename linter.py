@@ -450,7 +450,7 @@ class Linter(metaclass=LinterMeta):
             path = self.which(which)
 
         if not path:
-            persist.printf(_('ERROR: {} cannot locate \'{}\'').format(self.name, which))
+            persist.printf(_('ERROR: {} cannot locate "{}"').format(self.name, which))
             return ''
 
         cmd[0:1] = util.convert_type(path, [])
