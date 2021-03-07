@@ -38,7 +38,7 @@ def do_options_dlg():
             +[c1.join(['type=check', 'pos=6,100,400,0', 'cap='+_('Lint on &opening file'), 'val='+str(int(use_on_open))])]
             +[c1.join(['type=check', 'pos=6,126,400,0', 'cap='+_('Lint on &saving file'), 'val='+str(int(use_on_save))])]
             +[c1.join(['type=check', 'pos=6,152,400,0', 'cap='+_('Lint &after text changed, and pause'), 'val='+str(int(use_on_change))])]
-            +[c1.join(['type=button', 'pos=206,182,300,0', 'cap='+_('OK'), 'props=1'])]
+            +[c1.join(['type=button', 'pos=206,182,300,0', 'cap='+_('OK'), 'ex0=1'])]
             +[c1.join(['type=button', 'pos=306,182,400,0', 'cap='+_('Cancel')])]
                         )
         res = app.dlg_custom(_('CudaLint options'), 406, 215, text)
