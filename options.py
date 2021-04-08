@@ -77,9 +77,9 @@ def do_options_apply():
 
     if colors_themed:
         data = app.app_proc(app.PROC_THEME_SYNTAX_DICT_GET, '')
-        n1 = data['LightBG1']['color_back']
-        n2 = data['LightBG2']['color_back']
-        n3 = data['LightBG3']['color_back']
+        n1 = data['LightBG1']['color_back'] if color_error_use else app.COLOR_NONE
+        n2 = data['LightBG2']['color_back'] if color_warn_use else app.COLOR_NONE
+        n3 = data['LightBG3']['color_back'] if color_info_use else app.COLOR_NONE
     else:
         n1 = color_error if color_error_use else app.COLOR_NONE
         n2 = color_warn if color_warn_use else app.COLOR_NONE
