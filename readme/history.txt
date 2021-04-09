@@ -1,6 +1,6 @@
 
-2021.04.08
-+ add: option "Use all 3 colors from syntax-theme"
+2021.04.09
+* change: 3 color options are replaced with combobox-choices to choose syntax-theme items
 
 2021.02.12
 + add: support translation (patch by Markus)
