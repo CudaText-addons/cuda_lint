@@ -37,18 +37,18 @@ UNDERLINE_STYLES = [
 
 def do_options_dlg():
 
-    id_color_err=0
-    id_color_warn=2
-    id_color_info=4
-    id_bk_err=1
-    id_bk_warn=3
-    id_bk_info=5
-    id_underline=6
-    id_underline_style=7
-    id_ev_open=8
-    id_ev_save=9
-    id_ev_ch=10
-    id_ok=11
+    ID_COLOR_ERR      = 0
+    ID_COLOR_WARN     = 2
+    ID_COLOR_INFO     = 4
+    ID_BK_ERR         = 1
+    ID_BK_WARN        = 3
+    ID_BK_INFO        = 5
+    ID_UNDERLINE      = 6
+    ID_UNDERLINE_STYLE= 7
+    ID_EV_OPEN        = 8
+    ID_EV_SAVE        = 9
+    ID_EV_CH          = 10
+    ID_OK             = 11
 
     ev_line = app.ini_read(p_ini, 'events', 'cuda_lint', '')
     use_on_open = ',on_open,' in ','+ev_line+','
@@ -93,23 +93,23 @@ def do_options_dlg():
         btn, text = res
         break
 
-    if btn!=id_ok: return
+    if btn!=ID_OK: return
     text = text.splitlines()
 
-    opt.color_error = COLORS[int(text[id_color_err])]
-    opt.color_warn = COLORS[int(text[id_color_warn])]
-    opt.color_info = COLORS[int(text[id_color_info])]
+    opt.color_error = COLORS[int(text[ID_COLOR_ERR])]
+    opt.color_warn = COLORS[int(text[ID_COLOR_WARN])]
+    opt.color_info = COLORS[int(text[ID_COLOR_INFO])]
 
-    opt.color_error_use = text[id_bk_err]=='1'
-    opt.color_warn_use = text[id_bk_warn]=='1'
-    opt.color_info_use = text[id_bk_info]=='1'
+    opt.color_error_use = text[ID_BK_ERR]=='1'
+    opt.color_warn_use = text[ID_BK_WARN]=='1'
+    opt.color_info_use = text[ID_BK_INFO]=='1'
 
-    opt.underline = text[id_underline]=='1'
-    opt.underline_style = int(text[id_underline_style])
+    opt.underline = text[ID_UNDERLINE]=='1'
+    opt.underline_style = int(text[ID_UNDERLINE_STYLE])
     
-    use_on_open = text[id_ev_open]=='1'
-    use_on_save = text[id_ev_save]=='1'
-    use_on_change = text[id_ev_ch]=='1'
+    use_on_open = text[ID_EV_OPEN]=='1'
+    use_on_save = text[ID_EV_SAVE]=='1'
+    use_on_change = text[ID_EV_CH]=='1'
 
     ev = []
     if use_on_open:
