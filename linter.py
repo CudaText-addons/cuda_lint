@@ -686,6 +686,8 @@ class Linter(metaclass=LinterMeta):
                     x = bm[i]['col'] - 1
                     y = bm[i]['line']
                     nlen = editor_token_len(self.view, x, y)
+                    if nlen == 0:
+                        continue
                     self.view.attr(app.MARKERS_ADD,
                         tag = MY_TAG,
                         x = x,
