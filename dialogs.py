@@ -1,6 +1,6 @@
 import os
 import cudatext as app
-from . import options as opt
+from . import options
 
 from cudax_lib import get_translation
 _   = get_translation(__file__)  # I18N
@@ -56,17 +56,17 @@ def do_options_dlg():
     use_on_change = ',on_change_slow,' in ','+ev_line+','
     
     try:
-        val_er = COLORS.index(opt.color_error)
+        val_er = COLORS.index(options.color_error)
     except ValueError:
         val_er = 0
 
     try:
-        val_warn = COLORS.index(opt.color_warn)
+        val_warn = COLORS.index(options.color_warn)
     except ValueError:
         val_warn = 0
 
     try:
-        val_info = COLORS.index(opt.color_info)
+        val_info = COLORS.index(options.color_info)
     except ValueError:
         val_info = 0
 
@@ -74,13 +74,13 @@ def do_options_dlg():
         c1 = chr(1)
         text = '\n'.join([]
             +[c1.join(['type=combo_ro', 'pos=6,6,180,26', 'items='+'\t'.join(COLORS), 'val='+str(val_er) ])]
-            +[c1.join(['type=check', 'pos=186,6,400,0', 'cap='+_('Colored e&rror bookmarks'), 'val='+str(int(opt.color_error_use))])]
+            +[c1.join(['type=check', 'pos=186,6,400,0', 'cap='+_('Colored e&rror bookmarks'), 'val='+str(int(options.color_error_use))])]
             +[c1.join(['type=combo_ro', 'pos=6,36,180,56', 'items='+'\t'.join(COLORS), 'val='+str(val_warn) ])]
-            +[c1.join(['type=check', 'pos=186,36,400,0', 'cap='+_('Colored warn &bookmarks'), 'val='+str(int(opt.color_warn_use))])]
+            +[c1.join(['type=check', 'pos=186,36,400,0', 'cap='+_('Colored warn &bookmarks'), 'val='+str(int(options.color_warn_use))])]
             +[c1.join(['type=combo_ro', 'pos=6,66,180,86', 'items='+'\t'.join(COLORS), 'val='+str(val_info) ])]
-            +[c1.join(['type=check', 'pos=186,66,400,0', 'cap='+_('Colored info boo&kmarks'), 'val='+str(int(opt.color_info_use))])]
-            +[c1.join(['type=check', 'pos=6,100,400,0', 'cap='+_('Underline errors, don\'t place bookmarks'), 'val='+str(int(opt.underline))])]
-            +[c1.join(['type=combo_ro', 'pos=6,130,180,0', 'items='+'\t'.join(UNDERLINE_STYLES), 'val='+str(opt.underline_style)])]
+            +[c1.join(['type=check', 'pos=186,66,400,0', 'cap='+_('Colored info boo&kmarks'), 'val='+str(int(options.color_info_use))])]
+            +[c1.join(['type=check', 'pos=6,100,400,0', 'cap='+_('Underline errors, don\'t place bookmarks'), 'val='+str(int(options.underline))])]
+            +[c1.join(['type=combo_ro', 'pos=6,130,180,0', 'items='+'\t'.join(UNDERLINE_STYLES), 'val='+str(options.underline_style)])]
             +[c1.join(['type=check', 'pos=6,170,400,0', 'cap='+_('Lint on &opening file'), 'val='+str(int(use_on_open))])]
             +[c1.join(['type=check', 'pos=6,190,400,0', 'cap='+_('Lint on &saving file'), 'val='+str(int(use_on_save))])]
             +[c1.join(['type=check', 'pos=6,210,400,0', 'cap='+_('Lint &after text changed, and pause'), 'val='+str(int(use_on_change))])]
@@ -96,16 +96,16 @@ def do_options_dlg():
     if btn!=ID_OK: return
     text = text.splitlines()
 
-    opt.color_error = COLORS[int(text[ID_COLOR_ERR])]
-    opt.color_warn = COLORS[int(text[ID_COLOR_WARN])]
-    opt.color_info = COLORS[int(text[ID_COLOR_INFO])]
+    options.color_error = COLORS[int(text[ID_COLOR_ERR])]
+    options.color_warn = COLORS[int(text[ID_COLOR_WARN])]
+    options.color_info = COLORS[int(text[ID_COLOR_INFO])]
 
-    opt.color_error_use = text[ID_BK_ERR]=='1'
-    opt.color_warn_use = text[ID_BK_WARN]=='1'
-    opt.color_info_use = text[ID_BK_INFO]=='1'
+    options.color_error_use = text[ID_BK_ERR]=='1'
+    options.color_warn_use = text[ID_BK_WARN]=='1'
+    options.color_info_use = text[ID_BK_INFO]=='1'
 
-    opt.underline = text[ID_UNDERLINE]=='1'
-    opt.underline_style = int(text[ID_UNDERLINE_STYLE])
+    options.underline = text[ID_UNDERLINE]=='1'
+    options.underline_style = int(text[ID_UNDERLINE_STYLE])
     
     use_on_open = text[ID_EV_OPEN]=='1'
     use_on_save = text[ID_EV_SAVE]=='1'
@@ -123,5 +123,5 @@ def do_options_dlg():
         app.ini_write(p_ini, 'events', 'cuda_lint', ev_line_new)
         app.msg_box(_('CudaText should be restarted, to allow CudaLint use new event-options'), app.MB_OK+app.MB_ICONINFO)
 
-    opt.do_options_save()
+    options.do_options_save()
     #app.msg_box(_('CudaLint options changed, need to restart app'), app.MB_OK+app.MB_ICONINFO)
