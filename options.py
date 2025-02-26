@@ -22,7 +22,8 @@ use_on_open = False
 use_on_save = False
 use_on_change = False
 
-underline = True
+underline = False
+underline_style = 6
 
 fn_ini = os.path.join(app.app_path(app.APP_DIR_SETTINGS), 'cuda_lint.ini')
 
@@ -37,6 +38,7 @@ def do_options_load():
     global use_on_save
     global use_on_change
     global underline
+    global underline_style
 
     color_error = app.ini_read(fn_ini, 'colors', 'error_str', color_error)
     color_warn = app.ini_read(fn_ini, 'colors', 'warn_str', color_warn)
@@ -47,6 +49,7 @@ def do_options_load():
     color_info_use = app.ini_read(fn_ini, 'colors', 'info_use', '1')=='1'
 
     underline = app.ini_read(fn_ini, 'op', 'underline', '0')=='1'
+    underline_style = int(app.ini_read(fn_ini, 'op', 'underline_style', '6'))
 
     use_on_open = app.ini_read(fn_ini, 'events', 'on_open', '0')=='1'
     use_on_save = app.ini_read(fn_ini, 'events', 'on_save', '0')=='1'
@@ -88,6 +91,7 @@ def do_options_save():
     global use_on_save
     global use_on_change
     global underline
+    global underline_style
 
     app.ini_write(fn_ini, 'colors', 'error_str', color_error)
     app.ini_write(fn_ini, 'colors', 'warn_str', color_warn)
@@ -98,6 +102,7 @@ def do_options_save():
     app.ini_write(fn_ini, 'colors', 'info_use', str(int(color_info_use)))
 
     app.ini_write(fn_ini, 'op', 'underline', '1' if underline else '0')
+    app.ini_write(fn_ini, 'op', 'underline_style', str(underline_style))
 
     app.ini_write(fn_ini, 'events', 'on_open', str(int(use_on_open)))
     app.ini_write(fn_ini, 'events', 'on_save', str(int(use_on_save)))

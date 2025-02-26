@@ -17,7 +17,7 @@ from numbers import Number
 
 import cudatext as app
 from . import util
-from .options import KIND_ERROR, KIND_WARN, KIND_INFO, MY_TAG, underline
+from .options import KIND_ERROR, KIND_WARN, KIND_INFO, MY_TAG, underline, underline_style
 
 from cudax_lib import get_translation
 _   = get_translation(__file__)  # I18N
@@ -694,7 +694,7 @@ class Linter(metaclass=LinterMeta):
                         y = y,
                         len = nlen,
                         color_border = 0x0000FF, # red
-                        border_down = 6,
+                        border_down = underline_style,
                         )
             else:
                 for i in bm:
