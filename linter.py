@@ -39,7 +39,7 @@ def editor_token_len(ed: app.Editor, x, y):
     if (y<0) or (y>=ed.get_line_count()):
         return 0
     s = ed.get_text_line(y)
-    toks = ed.get_token(app.TOKEN_LIST_SUB, y, y)
+    toks = ed.get_token(app.TOKEN_LIST_SUB, y, y) or []
     toks = [t for t in toks if (t['y1']==y) and (t['x1']<=x) and (t['y2']>y or t['x2']>x)]
     if not toks:
         return 0
