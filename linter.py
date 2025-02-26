@@ -39,7 +39,7 @@ def editor_token_len(ed: app.Editor, x, y):
     s = ed.get_text_line(y)
     is_word = s[x].isalnum()
     x2 = x
-    while (x2 < len(s)) and (s[x2].isalnum() == is_word):
+    while (x2 < len(s)) and (s[x2].isalnum() == is_word) and (not s[x2].isspace()):
         x2 += 1
     return max(1, x2-x)
 
