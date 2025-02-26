@@ -1,3 +1,5 @@
+2025.02.26
+* change: command "Lint" can run even after "Disable", because it enables the action
 
 2021.04.09
 * change: 3 color options are replaced with combobox-choices to choose syntax-theme items

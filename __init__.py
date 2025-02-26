@@ -108,6 +108,7 @@ class Command:
         self.do_lint(ed_self)
 
     def run(self):
+        self.en = True
         self.do_lint(app.ed, True)
 
     def run_goto(self):
