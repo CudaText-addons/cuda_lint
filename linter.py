@@ -696,7 +696,7 @@ class Linter(metaclass=LinterMeta):
                         x = x,
                         y = y,
                         len = nlen,
-                        color_border = 0x0000FF, # red
+                        color_border = options.underline_color,
                         border_down = options.underline_style,
                         )
             else:

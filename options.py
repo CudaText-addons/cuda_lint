@@ -24,6 +24,7 @@ use_on_change = False
 
 underline = False
 underline_style = 6
+underline_color = 0xFF0000
 
 fn_ini = os.path.join(app.app_path(app.APP_DIR_SETTINGS), 'cuda_lint.ini')
 
@@ -55,7 +56,10 @@ def do_options_load():
     use_on_save = app.ini_read(fn_ini, 'events', 'on_save', '0')=='1'
     use_on_change = app.ini_read(fn_ini, 'events', 'on_change', '0')=='1'
 
+
 def do_options_apply():
+    global underline_color
+
     fn_warn = os.path.join(os.path.dirname(__file__), 'icons', 'bookmark_warn.png')
     fn_error = os.path.join(os.path.dirname(__file__), 'icons', 'bookmark_err.png')
 
@@ -64,11 +68,7 @@ def do_options_apply():
     n3 = app.COLOR_NONE
 
     data = app.app_proc(app.PROC_THEME_SYNTAX_DICT_GET, '')
-    
-    #print('er', color_error)
-    #print('w', color_warn)
-    #print('i', color_info)
-    
+
     if color_error in data and color_error_use:
         n1 = data[color_error]['color_back']
     if color_warn in data and color_warn_use:
@@ -79,6 +79,9 @@ def do_options_apply():
     app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_ERROR, n1, fn_error)
     app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_WARN, n2, fn_warn)
     app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_INFO, n3, fn_warn)
+
+    underline_color = data['IdBad']['color_font']
+
 
 def do_options_save():
     global color_error
