@@ -34,6 +34,19 @@ ARG_RE = re.compile(r'(?P<prefix>@|--?)?(?P<name>[@\w][\w\-]*)(?:(?P<joiner>[=:]
 
 linter_classes = {}
 
+def editor_token_len(ed: app.Editor, x, y):
+    """ Get length of editor token from (x, y) """
+    if (y<0) or (y>=ed.get_line_count()):
+        return 0
+    s = ed.get_text_line(y)
+    toks = ed.get_token(app.TOKEN_LIST_SUB, y, y)
+    toks = [t for t in toks if (t['y1']==y) and (t['x1']<=x) and (t['y2']>y or t['x2']>x)]
+    if not toks:
+        return 0
+    t = toks[0]
+    return t['x2'] - max(t['x1'], x)
+
+
 class LinterMeta(type):
 
     def __init__(cls, name, bases, attrs):
@@ -672,15 +685,12 @@ class Linter(metaclass=LinterMeta):
                 for i in bm:
                     x = bm[i]['col'] - 1
                     y = bm[i]['line']
-                    s = self.view.get_text_line(y)
-                    x2 = x
-                    while (x2 < len(s)) and s[x2].isalnum():
-                        x2 += 1
+                    nlen = editor_token_len(self.view, x, y)
                     self.view.attr(app.MARKERS_ADD,
                         tag = MY_TAG,
                         x = x,
                         y = y,
-                        len = x2-x,
+                        len = nlen,
                         color_border = 0x0000FF, # red
                         border_down = 6,
                         )
