@@ -43,14 +43,14 @@
 * readme changed to .txt
 
 2016.07.07
-+ commd "Lint, goto 1st mark"
++ command "Lint, goto 1st mark"
 
 2016.07.05
 + reorganized modules; instead of SublimeLinter.lint use cuda_lint
 + option "lint on save"
 
 2016.07.04
-+ menuitems: Disable, Enable
++ menu items: Disable, Enable
 - fix missing import
 
 2016.06.29
@@ -58,10 +58,7 @@
 * don't add [Cudatext]/exe_tools to search-path
 
 2016.06.26
-+ dialog for opts
++ dialog for options
 
-1.0.2
-+ hints on bookmark icons
- 
-1.0.0 (feb 2016)
-init
+2016.02
+initial version
