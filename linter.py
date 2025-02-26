@@ -44,7 +44,10 @@ def editor_token_len(ed: app.Editor, x, y):
     if not toks:
         return 0
     t = toks[0]
-    return t['x2'] - max(t['x1'], x)
+    x1 = t['x1']
+    x2 = t['x2'] if t['y2']==y else len(s)
+    r = max(0, x2 - max(x1, x))
+    return r
 
 
 class LinterMeta(type):
