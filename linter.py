@@ -17,7 +17,7 @@ from numbers import Number
 
 import cudatext as app
 from . import util
-from .options import KIND_ERROR, KIND_WARN, KIND_INFO, MY_TAG
+from .options import KIND_ERROR, KIND_WARN, KIND_INFO, MY_TAG, underline
 
 from cudax_lib import get_translation
 _   = get_translation(__file__)  # I18N
@@ -667,14 +667,32 @@ class Linter(metaclass=LinterMeta):
 
             self.view.attr(app.MARKERS_DELETE_BY_TAG, tag=MY_TAG)
             self.view.bookmark(app.BOOKMARK_DELETE_BY_TAG, 0, tag=MY_TAG)
-            for line in bm:
-                self.view.bookmark(app.BOOKMARK_SET, 
-                    nline=bm[line]['line'], 
-                    nkind=bm[line]['kind'], 
-                    text=bm[line]['msg'],
-                    tag=MY_TAG,
-                    show=False
-                    )
+
+            if underline:
+                for i in bm:
+                    x = bm[i]['col'] - 1
+                    y = bm[i]['line']
+                    s = self.view.get_text_line(y)
+                    x2 = x
+                    while (x2 < len(s)) and s[x2].isalnum():
+                        x2 += 1
+                    self.view.attr(app.MARKERS_ADD,
+                        tag = MY_TAG,
+                        x = x,
+                        y = y,
+                        len = x2-x,
+                        color_border = 0x0000FF, # red
+                        border_down = 6,
+                        )
+            else:
+                for i in bm:
+                    self.view.bookmark(app.BOOKMARK_SET, 
+                        nline = bm[i]['line'], 
+                        nkind = bm[i]['kind'], 
+                        text = bm[i]['msg'],
+                        tag = MY_TAG,
+                        show = False,
+                        )
 
         return error_count
 
