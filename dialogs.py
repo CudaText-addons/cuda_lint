@@ -26,13 +26,13 @@ COLORS = [
     ]
 
 UNDERLINE_STYLES = [
-    'None',
-    'Solid',
-    'Dash',
-    'Solid 2px',
-    'Dotted',
-    'Rounded',
-    'Wave'
+    _('None'),
+    _('Solid'),
+    _('Dash'),
+    _('Solid 2px'),
+    _('Dotted'),
+    _('Rounded'),
+    _('Wave'),
     ]
 
 def do_options_dlg():
