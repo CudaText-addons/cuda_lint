@@ -625,7 +625,7 @@ class Linter(metaclass=LinterMeta):
         app.app_log(app.LOG_SET_LINE_ID, '1', panel=app.LOG_PANEL_VALIDATE)
         app.app_log(app.LOG_SET_COL_ID, '2', panel=app.LOG_PANEL_VALIDATE)
         app.app_log(app.LOG_SET_ZEROBASE, '0', panel=app.LOG_PANEL_VALIDATE)
-        app.app_log(app.LOG_SET_REGEX, 'Line (\d+) Col (\d+):.+', panel=app.LOG_PANEL_VALIDATE)
+        app.app_log(app.LOG_SET_REGEX, r'Line (\d+) Col (\d+):.+', panel=app.LOG_PANEL_VALIDATE)
 
         m = []
         error_list = self.find_errors(output)
