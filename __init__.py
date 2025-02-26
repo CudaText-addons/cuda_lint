@@ -132,6 +132,7 @@ class Command:
         # clear bookmarks
         for h in app.ed_handles():
             e = app.Editor(h)
+            e.attr(app.MARKERS_DELETE_BY_TAG, tag=options.MY_TAG)
             e.bookmark(app.BOOKMARK_DELETE_BY_TAG, 0, tag=options.MY_TAG)
         self.clear_valid_pan()
 

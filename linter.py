@@ -613,6 +613,7 @@ class Linter(metaclass=LinterMeta):
 
         output = self.run(cmd, self.view.get_text_all())
 
+        self.view.attr(app.MARKERS_DELETE_BY_TAG, tag=MY_TAG)
         self.view.bookmark(app.BOOKMARK_DELETE_BY_TAG, 0, tag=MY_TAG)
         if not output:
             return 0
@@ -656,15 +657,21 @@ class Linter(metaclass=LinterMeta):
                             'Line {} Col {}: {}'.format(line, col, message),
                             panel=app.LOG_PANEL_VALIDATE)
 
-                bm[line] = (line-1, bm_kind, message)
+                bm[line] = {
+                    'line': line-1,
+                    'col': col,
+                    'kind': bm_kind,
+                    'msg': message,
+                    }
                 error_count += 1
 
+            self.view.attr(app.MARKERS_DELETE_BY_TAG, tag=MY_TAG)
             self.view.bookmark(app.BOOKMARK_DELETE_BY_TAG, 0, tag=MY_TAG)
             for line in bm:
                 self.view.bookmark(app.BOOKMARK_SET, 
-                    nline=bm[line][0], 
-                    nkind=bm[line][1], 
-                    text=bm[line][2],
+                    nline=bm[line]['line'], 
+                    nkind=bm[line]['kind'], 
+                    text=bm[line]['msg'],
                     tag=MY_TAG,
                     show=False
                     )
