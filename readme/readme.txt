@@ -22,7 +22,9 @@ and sometimes you need to install Node modules via NPM.
 See linter's readme file for details.
 
 Windows: "node.exe" must be in PATH, command "node -v" must work in console.
-Linux: "nodejs" package must be installed, command "nodejs -v" must work in terminal.
+Linux: "node" (preferred) or "nodejs" package must be installed.
+At least on Ubuntu, "nodejs" is older than "node" (2025/02 on Ubuntu 22.04:
+"nodejs" is 12.x, while "node" is 22.x).
 
 
 Usage
