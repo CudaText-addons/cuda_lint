@@ -34,8 +34,8 @@ ARG_RE = re.compile(r'(?P<prefix>@|--?)?(?P<name>[@\w][\w\-]*)(?:(?P<joiner>[=:]
 
 linter_classes = {}
 
-def editor_token_len(ed: app.Editor, x, y):
-    """ Get length of editor token from (x, y) """
+'''
+def editor_token_len__bad(ed: app.Editor, x, y):
     if (y<0) or (y>=ed.get_line_count()):
         return 0
     s = ed.get_text_line(y)
@@ -48,6 +48,20 @@ def editor_token_len(ed: app.Editor, x, y):
     x2 = t['x2'] if t['y2']==y else len(s)
     r = max(0, x2 - max(x1, x))
     return r
+'''
+
+def editor_token_len(ed: app.Editor, x, y):
+    """
+    Get length of editor token from (x, y).
+    """
+    if (y<0) or (y>=ed.get_line_count()):
+        return 0
+    s = ed.get_text_line(y)
+    x2 = x+1
+    is_wordchar = s[x].isalnum()
+    while s[x2].isalnum() == is_wordchar:
+        x2 += 1
+    return x2-x
 
 
 class LinterMeta(type):
