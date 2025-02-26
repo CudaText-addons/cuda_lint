@@ -52,12 +52,12 @@ In your project (Project Manager plugin), right-click root node of project treev
 
 linter_css=csslint
 
-In this example, CudaLint plugin allows, for mentioned lexer CSS, only linter "csslint",
-even if another CSS linter (e.g. "csstree") is installed and found first.
-
 Variable prefix "linter_" is required, after goes lower-case lexer name (CSS).
 Value of variable must be name of linter's folder (in the "py" folder) without "cuda_lint_".
 So if linter's folder is py/cuda_lint_aaa, specify the value "aaa".
+
+In this example, CudaLint plugin allows, for mentioned lexer CSS, only linter "csslint",
+even if another CSS linter (e.g. "csstree") is installed and found first.
 
 
 About
