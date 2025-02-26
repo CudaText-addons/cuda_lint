@@ -34,9 +34,11 @@ def editor_token_len(ed: app.Editor, x, y):
     """
     Get length of editor token from (x, y).
     """
-    if (y<0) or (y>=ed.get_line_count()):
+    if y < 0 or y >= ed.get_line_count():
         return 0
     s = ed.get_text_line(y)
+    if x >= len(s):
+        return 0
     is_word = s[x].isalnum()
     x2 = x
     while (x2 < len(s)) and (s[x2].isalnum() == is_word) and (not s[x2].isspace()):
