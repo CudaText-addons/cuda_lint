@@ -80,7 +80,8 @@ def do_options_apply():
     app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_WARN, n2, fn_warn)
     app.ed.bookmark(app.BOOKMARK_SETUP, 0, KIND_INFO, n3, fn_warn)
 
-    underline_color = data['IdBad']['color_font']
+    data_ui = app.app_proc(app.PROC_THEME_UI_DICT_GET, '')
+    underline_color = data_ui['EdMicromapSpell']['color']
 
 
 def do_options_save():
