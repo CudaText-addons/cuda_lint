@@ -4,7 +4,6 @@ desc=Linting (syntax-checking) of source code. Needs "linters" for each lexer yo
 type=cudatext-plugin
 subdir=cuda_lint
 homepage=https://github.com/CudaText-addons/cuda_lint
-api=1.0.342
 
 [item2]
 section=commands
