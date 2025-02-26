@@ -34,10 +34,11 @@ def do_options_dlg():
     id_bk_err=1
     id_bk_warn=3
     id_bk_info=5
-    id_ev_open=6
-    id_ev_save=7
-    id_ev_ch=8
-    id_ok=9
+    id_underline=6
+    id_ev_open=7
+    id_ev_save=8
+    id_ev_ch=9
+    id_ok=10
 
     ev_line = app.ini_read(p_ini, 'events', 'cuda_lint', '')
     use_on_open = ',on_open,' in ','+ev_line+','
@@ -68,13 +69,14 @@ def do_options_dlg():
             +[c1.join(['type=check', 'pos=186,36,400,0', 'cap='+_('Colored warn &bookmarks'), 'val='+str(int(opt.color_warn_use))])]
             +[c1.join(['type=combo_ro', 'pos=6,66,180,86', 'items='+'\t'.join(COLORS), 'val='+str(val_info) ])]
             +[c1.join(['type=check', 'pos=186,66,400,0', 'cap='+_('Colored info boo&kmarks'), 'val='+str(int(opt.color_info_use))])]
-            +[c1.join(['type=check', 'pos=6,130,400,0', 'cap='+_('Lint on &opening file'), 'val='+str(int(use_on_open))])]
-            +[c1.join(['type=check', 'pos=6,156,400,0', 'cap='+_('Lint on &saving file'), 'val='+str(int(use_on_save))])]
-            +[c1.join(['type=check', 'pos=6,182,400,0', 'cap='+_('Lint &after text changed, and pause'), 'val='+str(int(use_on_change))])]
-            +[c1.join(['type=button', 'pos=206,212,300,0', 'cap='+_('OK'), 'ex0=1'])]
-            +[c1.join(['type=button', 'pos=306,212,400,0', 'cap='+_('Cancel')])]
+            +[c1.join(['type=check', 'pos=6,115,400,0', 'cap='+_('Underline errors, don\'t place bookmarks'), 'val='+str(int(opt.underline))])]
+            +[c1.join(['type=check', 'pos=6,150,400,0', 'cap='+_('Lint on &opening file'), 'val='+str(int(use_on_open))])]
+            +[c1.join(['type=check', 'pos=6,176,400,0', 'cap='+_('Lint on &saving file'), 'val='+str(int(use_on_save))])]
+            +[c1.join(['type=check', 'pos=6,202,400,0', 'cap='+_('Lint &after text changed, and pause'), 'val='+str(int(use_on_change))])]
+            +[c1.join(['type=button', 'pos=206,232,300,0', 'cap='+_('OK'), 'ex0=1'])]
+            +[c1.join(['type=button', 'pos=306,232,400,0', 'cap='+_('Cancel')])]
                         )
-        res = app.dlg_custom(_('CudaLint options'), 406, 245, text)
+        res = app.dlg_custom(_('CudaLint options'), 406, 265, text)
         if res is None: return
 
         btn, text = res
@@ -91,6 +93,8 @@ def do_options_dlg():
     opt.color_warn_use = text[id_bk_warn]=='1'
     opt.color_info_use = text[id_bk_info]=='1'
 
+    opt.underline = text[id_underline]=='1'
+    
     use_on_open = text[id_ev_open]=='1'
     use_on_save = text[id_ev_save]=='1'
     use_on_change = text[id_ev_ch]=='1'
