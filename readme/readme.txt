@@ -9,10 +9,12 @@ with additionally installed linter, for example:
 
 You will find all linters in the Addon Manager: "Plugins / Addon Manager / Install".
 Linters are installable like other plugins but they don't add commands, they only add folders
-"[CudaText]/py/cuda_lint_*", which are automatically used by CudaLint.
+"py/cuda_lint_*", which are automatically used by CudaLint.
 After you install a linter, see readme in its folder, maybe how-to-use info is written there.
 
-=== Node.js ===
+
+Node.js
+-------
 
 Some linters require Node.js, so for those linters, you must install Node first.
 Those linters are sometimes shipped with Node modules preinstalled (in plugin folder)
@@ -22,7 +24,9 @@ See linter's readme file for details.
 Windows: "node.exe" must be in PATH, command "node -v" must work in console.
 Linux: "nodejs" package must be installed, command "nodejs -v" must work in terminal.
 
-=== Usage ===
+
+Usage
+-----
 
 To run linting, use menu item "Plugins / CudaLint / Lint", or set hotkey to this command
 (in CudaText Command Palette, press F9). You will see statusbar message, which tells how many errors
@@ -38,7 +42,26 @@ Linting can be run by events:
 Events aren't used by default (to not slowdown usual work). To use events, you must enable them in config.
 Call config by menu item in "Options / Settings-plugins".
 
-=== About ===
+
+
+How to configure linters per project
+------------------------------------
+
+In your project (Project Manager plugin), right-click root node of project treeview, call menu item
+"Project file / Project properties...". In this dialog, in the "Variablies" field, enter variable(s) like this:
+
+linter_css=csslint
+
+In this example, CudaLint plugin allows, for mentioned lexer CSS, only linter "csslint",
+even if another CSS linter (e.g. "csstree") is installed and found first.
+
+Variable prefix "linter_" is required, after goes lower-case lexer name (CSS).
+Value of variable must be name of linter's folder (in the "py" folder) without "cuda_lint_".
+So if linter's folder is py/cuda_lint_aaa, specify the value "aaa".
+
+
+About
+-----
 
 Authors:
 - Alexey Torgashin (CudaText)
