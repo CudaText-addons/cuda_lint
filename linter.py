@@ -25,14 +25,10 @@ _   = get_translation(__file__)  # I18N
 WARNING = 'warning'
 ERROR = 'error'
 
-#
-# Private constants
-#
 ARG_RE = re.compile(r'(?P<prefix>@|--?)?(?P<name>[@\w][\w\-]*)(?:(?P<joiner>[=:])(?:(?P<sep>.)(?P<multiple>\+)?)?)?')
 
-# Colors of bookmarks
-
 linter_classes = {}
+
 
 def editor_token_len(ed: app.Editor, x, y):
     """
