@@ -17,7 +17,7 @@ from numbers import Number
 
 import cudatext as app
 from . import util
-from .options import KIND_ERROR, KIND_WARN, KIND_INFO, MY_TAG, underline, underline_style
+from . import options
 
 from cudax_lib import get_translation
 _   = get_translation(__file__)  # I18N
@@ -626,8 +626,8 @@ class Linter(metaclass=LinterMeta):
 
         output = self.run(cmd, self.view.get_text_all())
 
-        self.view.attr(app.MARKERS_DELETE_BY_TAG, tag=MY_TAG)
-        self.view.bookmark(app.BOOKMARK_DELETE_BY_TAG, 0, tag=MY_TAG)
+        self.view.attr(app.MARKERS_DELETE_BY_TAG, tag=options.MY_TAG)
+        self.view.bookmark(app.BOOKMARK_DELETE_BY_TAG, 0, tag=options.MY_TAG)
         if not output:
             return 0
 
@@ -653,16 +653,16 @@ class Linter(metaclass=LinterMeta):
             bm = dict()
             for line, col, message, error, warning in m:
                 if error:
-                    bm_kind = KIND_ERROR
+                    bm_kind = options.KIND_ERROR
                 elif warning:
-                    bm_kind = KIND_WARN
+                    bm_kind = options.KIND_WARN
                 else:
                     if self.default_type == ERROR:
-                        bm_kind = KIND_ERROR
+                        bm_kind = options.KIND_ERROR
                     elif self.default_type == WARNING:
-                        bm_kind = KIND_WARN
+                        bm_kind = options.KIND_WARN
                     else:
-                        bm_kind = KIND_INFO
+                        bm_kind = options.KIND_INFO
 
                 if col is None:
                     col = 1
@@ -678,10 +678,10 @@ class Linter(metaclass=LinterMeta):
                     }
                 error_count += 1
 
-            self.view.attr(app.MARKERS_DELETE_BY_TAG, tag=MY_TAG)
-            self.view.bookmark(app.BOOKMARK_DELETE_BY_TAG, 0, tag=MY_TAG)
+            self.view.attr(app.MARKERS_DELETE_BY_TAG, tag=options.MY_TAG)
+            self.view.bookmark(app.BOOKMARK_DELETE_BY_TAG, 0, tag=options.MY_TAG)
 
-            if underline:
+            if options.underline:
                 for i in bm:
                     x = bm[i]['col'] - 1
                     y = bm[i]['line']
@@ -689,12 +689,12 @@ class Linter(metaclass=LinterMeta):
                     if nlen == 0:
                         continue
                     self.view.attr(app.MARKERS_ADD,
-                        tag = MY_TAG,
+                        tag = options.MY_TAG,
                         x = x,
                         y = y,
                         len = nlen,
                         color_border = 0x0000FF, # red
-                        border_down = underline_style,
+                        border_down = options.underline_style,
                         )
             else:
                 for i in bm:
@@ -702,7 +702,7 @@ class Linter(metaclass=LinterMeta):
                         nline = bm[i]['line'], 
                         nkind = bm[i]['kind'], 
                         text = bm[i]['msg'],
-                        tag = MY_TAG,
+                        tag = options.MY_TAG,
                         show = False,
                         )
 
