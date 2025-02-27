@@ -264,6 +264,10 @@ class PythonLinter(linter.Linter):
                 use_module = cmd is None or cmd[0] == '<builtin>'
 
             if use_module:
+                errors = self.check(code, os.path.basename(self.filename or '<unsaved>'))
+                '''
+                # Alexey 2025.02: commented this try/except block,
+                # to enable stack traces in CudaText console
                 try:
                     errors = self.check(code, os.path.basename(self.filename or '<unsaved>'))
                 except Exception as err:
@@ -272,6 +276,7 @@ class PythonLinter(linter.Linter):
                         .format(self.name, str(err))
                     )
                     errors = ''
+                '''
 
                 if isinstance(errors, (tuple, list)):
                     return '\n'.join([str(e) for e in errors])
