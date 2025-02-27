@@ -70,29 +70,26 @@ def do_options_dlg():
     except ValueError:
         val_info = 0
 
-    while True:
-        c1 = chr(1)
-        text = '\n'.join([]
-            +[c1.join(['type=combo_ro', 'pos=6,6,180,26', 'items='+'\t'.join(COLORS), 'val='+str(val_er) ])]
-            +[c1.join(['type=check', 'pos=186,6,400,0', 'cap='+_('Colored e&rror bookmarks'), 'val='+str(int(options.color_error_use))])]
-            +[c1.join(['type=combo_ro', 'pos=6,36,180,56', 'items='+'\t'.join(COLORS), 'val='+str(val_warn) ])]
-            +[c1.join(['type=check', 'pos=186,36,400,0', 'cap='+_('Colored warn &bookmarks'), 'val='+str(int(options.color_warn_use))])]
-            +[c1.join(['type=combo_ro', 'pos=6,66,180,86', 'items='+'\t'.join(COLORS), 'val='+str(val_info) ])]
-            +[c1.join(['type=check', 'pos=186,66,400,0', 'cap='+_('Colored info boo&kmarks'), 'val='+str(int(options.color_info_use))])]
-            +[c1.join(['type=check', 'pos=6,100,400,0', 'cap='+_('Underline errors'), 'val='+str(int(options.underline))])]
-            +[c1.join(['type=combo_ro', 'pos=6,130,180,0', 'items='+'\t'.join(UNDERLINE_STYLES), 'val='+str(options.underline_style)])]
-            +[c1.join(['type=label', 'pos=186,130,400,0', 'cap='+_('Underline style')])]
-            +[c1.join(['type=check', 'pos=6,170,400,0', 'cap='+_('Lint on &opening file'), 'val='+str(int(use_on_open))])]
-            +[c1.join(['type=check', 'pos=6,190,400,0', 'cap='+_('Lint on &saving file'), 'val='+str(int(use_on_save))])]
-            +[c1.join(['type=check', 'pos=6,210,400,0', 'cap='+_('Lint &after text changed, and pause'), 'val='+str(int(use_on_change))])]
-            +[c1.join(['type=button', 'pos=206,242,300,0', 'cap='+_('OK'), 'ex0=1'])]
-            +[c1.join(['type=button', 'pos=306,242,400,0', 'cap='+_('Cancel')])]
-                        )
-        res = app.dlg_custom(_('CudaLint options'), 406, 275, text)
-        if res is None: return
-
-        btn, text = res
-        break
+    c1 = chr(1)
+    text = '\n'.join([]
+        +[c1.join(['type=combo_ro', 'pos=6,6,180,26', 'items='+'\t'.join(COLORS), 'val='+str(val_er) ])]
+        +[c1.join(['type=check', 'pos=186,6,400,0', 'cap='+_('Colored e&rror bookmarks'), 'val='+str(int(options.color_error_use))])]
+        +[c1.join(['type=combo_ro', 'pos=6,36,180,56', 'items='+'\t'.join(COLORS), 'val='+str(val_warn) ])]
+        +[c1.join(['type=check', 'pos=186,36,400,0', 'cap='+_('Colored warn &bookmarks'), 'val='+str(int(options.color_warn_use))])]
+        +[c1.join(['type=combo_ro', 'pos=6,66,180,86', 'items='+'\t'.join(COLORS), 'val='+str(val_info) ])]
+        +[c1.join(['type=check', 'pos=186,66,400,0', 'cap='+_('Colored info boo&kmarks'), 'val='+str(int(options.color_info_use))])]
+        +[c1.join(['type=check', 'pos=6,100,400,0', 'cap='+_('Underline errors'), 'val='+str(int(options.underline))])]
+        +[c1.join(['type=combo_ro', 'pos=6,130,180,0', 'items='+'\t'.join(UNDERLINE_STYLES), 'val='+str(options.underline_style)])]
+        +[c1.join(['type=label', 'pos=186,130,400,0', 'cap='+_('Underline style')])]
+        +[c1.join(['type=check', 'pos=6,170,400,0', 'cap='+_('Lint on &opening file'), 'val='+str(int(use_on_open))])]
+        +[c1.join(['type=check', 'pos=6,190,400,0', 'cap='+_('Lint on &saving file'), 'val='+str(int(use_on_save))])]
+        +[c1.join(['type=check', 'pos=6,210,400,0', 'cap='+_('Lint &after text changed, and pause'), 'val='+str(int(use_on_change))])]
+        +[c1.join(['type=button', 'pos=206,242,300,0', 'cap='+_('OK'), 'ex0=1'])]
+        +[c1.join(['type=button', 'pos=306,242,400,0', 'cap='+_('Cancel')])]
+                    )
+    res = app.dlg_custom(_('CudaLint options'), 406, 275, text)
+    if res is None: return
+    btn, text = res
 
     if btn!=ID_OK: return
     text = text.splitlines()
