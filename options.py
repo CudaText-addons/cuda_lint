@@ -22,7 +22,7 @@ use_on_open = False
 use_on_save = False
 use_on_change = False
 
-underline = False
+underline = True
 underline_style = 6
 underline_color = 0xFF0000
 
@@ -45,11 +45,11 @@ def do_options_load():
     color_warn = app.ini_read(fn_ini, 'colors', 'warn_str', color_warn)
     color_info = app.ini_read(fn_ini, 'colors', 'info_str', color_info)
 
-    color_error_use = app.ini_read(fn_ini, 'colors', 'error_use', '1')=='1'
-    color_warn_use = app.ini_read(fn_ini, 'colors', 'warn_use', '1')=='1'
-    color_info_use = app.ini_read(fn_ini, 'colors', 'info_use', '1')=='1'
+    color_error_use = app.ini_read(fn_ini, 'colors', 'error_use', '0')=='1'
+    color_warn_use = app.ini_read(fn_ini, 'colors', 'warn_use', '0')=='1'
+    color_info_use = app.ini_read(fn_ini, 'colors', 'info_use', '0')=='1'
 
-    underline = app.ini_read(fn_ini, 'op', 'underline', '0')=='1'
+    underline = app.ini_read(fn_ini, 'op', 'underline', '1')=='1'
     underline_style = int(app.ini_read(fn_ini, 'op', 'underline_style', '6'))
 
     use_on_open = app.ini_read(fn_ini, 'events', 'on_open', '0')=='1'

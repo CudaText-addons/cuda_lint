@@ -685,7 +685,7 @@ class Linter(metaclass=LinterMeta):
                     x = bm[i]['col'] - 1
                     y = bm[i]['line']
                     nlen = editor_token_len(self.view, x, y)
-                    if nlen == 0:
+                    if nlen <= 0:
                         continue
                     self.view.attr(app.MARKERS_ADD,
                         tag = options.MY_TAG,
@@ -695,15 +695,15 @@ class Linter(metaclass=LinterMeta):
                         color_border = options.underline_color,
                         border_down = options.underline_style,
                         )
-            else:
-                for i in bm:
-                    self.view.bookmark(app.BOOKMARK_SET, 
-                        nline = bm[i]['line'], 
-                        nkind = bm[i]['kind'], 
-                        text = bm[i]['msg'],
-                        tag = options.MY_TAG,
-                        show = False,
-                        )
+
+            for i in bm:
+                self.view.bookmark(app.BOOKMARK_SET,
+                    nline = bm[i]['line'],
+                    nkind = bm[i]['kind'],
+                    text = bm[i]['msg'],
+                    tag = options.MY_TAG,
+                    show = False,
+                    )
 
         return error_count
 
