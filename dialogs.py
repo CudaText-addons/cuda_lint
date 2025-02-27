@@ -78,7 +78,7 @@ def do_options_dlg():
         +[c1.join(['type=check', 'pos=156,36,400,0', 'cap='+_('Colored warn &bookmarks'), 'val='+str(int(options.color_warn_use))])]
         +[c1.join(['type=combo_ro', 'pos=6,66,150,86', 'items='+'\t'.join(COLORS), 'val='+str(val_info) ])]
         +[c1.join(['type=check', 'pos=156,66,400,0', 'cap='+_('Colored info boo&kmarks'), 'val='+str(int(options.color_info_use))])]
-        +[c1.join(['type=check', 'pos=6,100,400,0', 'cap='+_('Underline errors'), 'val='+str(int(options.underline))])]
+        +[c1.join(['type=check', 'pos=6,100,400,0', 'cap='+_('Underline (all kinds: error/warn/info)'), 'val='+str(int(options.underline))])]
         +[c1.join(['type=combo_ro', 'pos=6,130,150,0', 'items='+'\t'.join(UNDERLINE_STYLES), 'val='+str(options.underline_style)])]
         +[c1.join(['type=label', 'pos=156,130,400,0', 'cap='+_('Underline style')])]
         +[c1.join(['type=check', 'pos=6,170,400,0', 'cap='+_('Lint on &opening file'), 'val='+str(int(use_on_open))])]
