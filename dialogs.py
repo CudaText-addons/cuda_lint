@@ -45,10 +45,10 @@ def do_options_dlg():
     ID_BK_INFO        = 5
     ID_UNDERLINE      = 6
     ID_UNDERLINE_STYLE= 7
-    ID_EV_OPEN        = 8
-    ID_EV_SAVE        = 9
-    ID_EV_CH          = 10
-    ID_OK             = 11
+    ID_EV_OPEN        = 9
+    ID_EV_SAVE        = 10
+    ID_EV_CH          = 11
+    ID_OK             = 12
 
     ev_line = app.ini_read(p_ini, 'events', 'cuda_lint', '')
     use_on_open = ',on_open,' in ','+ev_line+','
@@ -79,8 +79,9 @@ def do_options_dlg():
             +[c1.join(['type=check', 'pos=186,36,400,0', 'cap='+_('Colored warn &bookmarks'), 'val='+str(int(options.color_warn_use))])]
             +[c1.join(['type=combo_ro', 'pos=6,66,180,86', 'items='+'\t'.join(COLORS), 'val='+str(val_info) ])]
             +[c1.join(['type=check', 'pos=186,66,400,0', 'cap='+_('Colored info boo&kmarks'), 'val='+str(int(options.color_info_use))])]
-            +[c1.join(['type=check', 'pos=6,100,400,0', 'cap='+_('Underline errors, don\'t place bookmarks'), 'val='+str(int(options.underline))])]
+            +[c1.join(['type=check', 'pos=6,100,400,0', 'cap='+_('Underline errors'), 'val='+str(int(options.underline))])]
             +[c1.join(['type=combo_ro', 'pos=6,130,180,0', 'items='+'\t'.join(UNDERLINE_STYLES), 'val='+str(options.underline_style)])]
+            +[c1.join(['type=label', 'pos=186,130,400,0', 'cap='+_('Underline style')])]
             +[c1.join(['type=check', 'pos=6,170,400,0', 'cap='+_('Lint on &opening file'), 'val='+str(int(use_on_open))])]
             +[c1.join(['type=check', 'pos=6,190,400,0', 'cap='+_('Lint on &saving file'), 'val='+str(int(use_on_save))])]
             +[c1.join(['type=check', 'pos=6,210,400,0', 'cap='+_('Lint &after text changed, and pause'), 'val='+str(int(use_on_change))])]
