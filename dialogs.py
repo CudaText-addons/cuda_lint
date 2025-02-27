@@ -48,7 +48,7 @@ def do_options_dlg():
     ID_EV_OPEN        = 9
     ID_EV_SAVE        = 10
     ID_EV_CH          = 11
-    ID_OK             = 12
+    ID_BTN_OK         = 12
 
     ev_line = app.ini_read(p_ini, 'events', 'cuda_lint', '')
     use_on_open = ',on_open,' in ','+ev_line+','
@@ -90,8 +90,7 @@ def do_options_dlg():
     res = app.dlg_custom(_('CudaLint options'), 406, 275, text)
     if res is None: return
     btn, text = res
-
-    if btn!=ID_OK: return
+    if btn!=ID_BTN_OK: return
     text = text.splitlines()
 
     options.color_error = COLORS[int(text[ID_COLOR_ERR])]
