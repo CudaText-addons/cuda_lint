@@ -54,7 +54,7 @@ def do_options_dlg():
     use_on_open = ',on_open,' in ','+ev_line+','
     use_on_save = ',on_save,' in ','+ev_line+','
     use_on_change = ',on_change_slow,' in ','+ev_line+','
-    
+
     try:
         val_er = COLORS.index(options.color_error)
     except ValueError:
@@ -104,7 +104,7 @@ def do_options_dlg():
 
     options.underline = text[ID_UNDERLINE]=='1'
     options.underline_style = int(text[ID_UNDERLINE_STYLE])
-    
+
     use_on_open = text[ID_EV_OPEN]=='1'
     use_on_save = text[ID_EV_SAVE]=='1'
     use_on_change = text[ID_EV_CH]=='1'
