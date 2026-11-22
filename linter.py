@@ -4,7 +4,7 @@
 # Part of SublimeLinter3, a code checking framework for Sublime Text 3
 #
 # Written by Ryan Hileman and Aparajita Fishman
-# Change for CudaLint: Alexey T.
+# Changed for CudaLint: Alexey Torgashin
 #
 # Project: https://github.com/SublimeLinter/SublimeLinter3
 # License: MIT
@@ -335,7 +335,7 @@ class Linter(metaclass=LinterMeta):
     @property
     def filename(self):
         """Return the view's file path or '' of unsaved."""
-        return self.view.get_filename()
+        return self.view.get_prop(app.PROP_FN, '')
 
     @property
     def name(self):

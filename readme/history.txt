@@ -1,3 +1,6 @@
+2026.11.21
+- fix: avoid deprecated API: get_filename
+
 2025.02.26
 + add: option "Underline errors" in config dialog
 * change: command "Lint" can run even after "Disable", because it enables the action first
